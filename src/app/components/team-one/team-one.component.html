@@ -1,0 +1,34 @@
+<form [formGroup]="cardForms">
+  <div class="row">
+    <ng-container *ngFor="let card of cardForms.get('cards').controls; let i = index">
+      <ng-container [formGroup]="card">
+        <div [ngClass]="{'col-md-3 cardNormalStyle': card.get('clicked').value === false, 
+          'col-md-11 cardExpanedStyle': card.get('clicked').value === true}">
+          <div class="row" *ngIf="card.get('clicked').value === false">
+            <div class="col-md-12 text-center" (click)="getQuestionView(card, i)">{{card.get('title').value}}</div>
+          </div>
+          <div class="row" *ngIf="card.get('clicked').value === true">
+            <div class="col-md-12 text-center">
+                {{card.get('title').value}}
+            </div>
+            <div class="col-md-12" *ngFor="let question of card.get('questions').controls; let j = index">
+              <ng-container class="row" [formGroup]="question">
+                <div *ngIf="question.get('formType').value === 'textbox'">
+                    {{question.get('question').value}}<input type="text" class="form-control" id="usr">
+                </div>
+                <div *ngIf="question.get('formType').value === 'checkbox'">
+                     {{question.get('question').value}}
+                        <input type="checkbox" value="">
+                </div>
+               
+              </ng-container>
+            </div>
+            <div class="col-md-12 text-center">
+                <button type="button" class="btn btn-success">Update</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</form>

@@ -1,0 +1,20 @@
+.cardNormalStyle {
+    display: flex;
+    height: 150px;
+    width: 100%;
+    border: 1px solid grey;
+    margin: 10px;
+    justify-content: center;
+    align-items: center;
+    transition: 1s;
+}
+
+.cardExpanedStyle {
+    display: flex;
+    width: 100%;
+    border: 1px solid grey;
+    margin: 10px;
+    /* justify-content: center; */
+    transition: 1s;
+    padding: 10px;
+}
