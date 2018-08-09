@@ -1,6 +1,6 @@
 <form [formGroup]="cardForms">
   <div class="row">
-    <ng-container *ngFor="let card of cardForms.get('cards').controls; let i = index">
+    <ng-container *ngFor="let card of formData.controls; let i = index">
       <ng-container [formGroup]="card">
         <div [ngClass]="{'col-md-3 cardNormalStyle': card.get('clicked').value === false, 
           'col-md-11 cardExpanedStyle': card.get('clicked').value === true}">

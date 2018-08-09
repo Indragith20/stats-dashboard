@@ -16,6 +16,9 @@ export class TeamOneComponent implements OnInit {
   }
   cardForms: FormGroup;
   cards: any;
+
+  get formData() { return <FormArray>this.cardForms.get('cards'); }
+
   constructor(private fb: FormBuilder) { 
     this.cardForms = this.fb.group({
       team: ['1'],
