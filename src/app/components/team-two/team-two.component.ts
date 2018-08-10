@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-team-two',
@@ -16,10 +17,15 @@ export class TeamTwoComponent implements OnInit {
   }
   cardForms: FormGroup;
   cards: any;
+  closeResult:string;
+  modalContent: FormGroup;
+  modalHeader: string;
 
   get formData() { return <FormArray>this.cardForms.get('cards'); }
+
+  get modalFormData() { return <FormArray>this.modalContent.get('questions'); }
   
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder, private modalService: NgbModal) { 
     this.cardForms = this.fb.group({
       team: ['1'],
       cards: new FormArray([])
@@ -43,6 +49,7 @@ export class TeamTwoComponent implements OnInit {
       const newFormGroup = this.fb.group({
         clicked: false,
         title: card.title,
+        icon: card.icon,
         questions: questionFormArray
       });
 
@@ -51,19 +58,23 @@ export class TeamTwoComponent implements OnInit {
     console.log(this.cardForms);
   }
 
-  getQuestionView(card, i) {
-    const cardDetails = this.cardForms.get('cards').value;
-    cardDetails.map((card, index) => {
-      if(i === index){
-        (this.cardForms.get('cards') as FormArray).at(index).patchValue({
-          clicked: true
-        });
-      } else {
-        (this.cardForms.get('cards') as FormArray).at(index).patchValue({
-          clicked: false
-        });
-      }
-      
-    })
+  open(content, card) {
+    this.modalContent = card;
+    this.modalHeader = card.get('title').value;
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
   }
 }

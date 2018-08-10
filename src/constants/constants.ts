@@ -1,6 +1,7 @@
 export const cards = [{
     title: 'Free Throw',
     id: 1,
+    icon: '../../../assets/icons/free throw.png',
     questions: [{
         questionId: 1,
         question: 'Enter Player NUmber',
@@ -9,6 +10,7 @@ export const cards = [{
 }, {
     title: '2 Point',
     id: 2,
+    icon: '../../../assets/icons/2 pointer.png',
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
@@ -29,6 +31,7 @@ export const cards = [{
 }, {
     title: '3 Point',
     id: 3,
+    icon: '../../../assets/icons/3 pointer.png',
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
@@ -49,6 +52,7 @@ export const cards = [{
 }, {
     title: 'Block',
     id: 4,
+    icon: '../../../assets/icons/blocking.png',
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
@@ -57,6 +61,7 @@ export const cards = [{
 }, {
     title: 'Steal',
     id: 5,
+    icon: '../../../assets/icons/Steal.png',
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
@@ -69,6 +74,7 @@ export const cards = [{
 }, {
     title: 'Free Throw Miss',
     id: 6,
+    icon: '../../../assets/icons/free throw miss.png',
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
@@ -85,6 +91,7 @@ export const cards = [{
 }, {
     title: '2 Pt Miss',
     id: 7,
+    icon: '../../../assets/icons/3 point attempt.png',
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
@@ -101,6 +108,7 @@ export const cards = [{
 }, {
     title: '3 Pt Miss',
     id: 8,
+    icon: '../../../assets/icons/3 point attempt.png',
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
@@ -117,6 +125,7 @@ export const cards = [{
 }, {
     title: 'TurnOver',
     id: 9,
+    icon: '../../../assets/icons/travelling.png',
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
@@ -129,6 +138,7 @@ export const cards = [{
 }, {
     title: 'Foul',
     id: 10,
+    icon: '../../../assets/icons/intentional foul.png',
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',

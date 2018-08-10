@@ -2,16 +2,31 @@
   <div class="row">
     <ng-container *ngFor="let card of formData.controls; let i = index">
       <ng-container [formGroup]="card">
-        <div [ngClass]="{'col-md-3 cardNormalStyle': card.get('clicked').value === false, 
-          'col-md-11 cardExpanedStyle': card.get('clicked').value === true}">
-          <div class="row" *ngIf="card.get('clicked').value === false">
-            <div class="col-md-12 text-center" (click)="getQuestionView(card, i)">{{card.get('title').value}}</div>
-          </div>
-          <div class="row" *ngIf="card.get('clicked').value === true">
-            <div class="col-md-12 text-center">
+        <div class="col-md-2 col-md-offset-4 cardNormalStyle" (click)="open(content, card)">
+          <div class="row">
+              <div class="col-md-12 text-center">
+                  <img src="{{card.get('icon').value}}" alt="image" height=50 width=50/>
+              </div>
+              <div class="col-md-12 text-center">
                 {{card.get('title').value}}
-            </div>
-            <div class="col-md-12" *ngFor="let question of card.get('questions').controls; let j = index">
+              </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</form>
+
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{modalHeader}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="modalContent">
+          <div class="col-md-12" *ngFor="let question of modalFormData.controls; let j = index">
               <ng-container class="row" [formGroup]="question">
                 <div *ngIf="question.get('formType').value === 'textbox'">
                     {{question.get('question').value}}<input type="text" class="form-control" id="usr">
@@ -23,12 +38,9 @@
                
               </ng-container>
             </div>
-            <div class="col-md-12 text-center">
-                <button type="button" class="btn btn-success">Update</button>
-            </div>
-          </div>
-        </div>
-      </ng-container>
-    </ng-container>
-  </div>
-</form>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Update</button>
+    </div>
+  </ng-template>
