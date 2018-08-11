@@ -5,7 +5,7 @@ export const cards = [{
     questions: [{
         questionId: 1,
         question: 'Enter Player NUmber',
-        type: 'textbox'
+        type: 'icon'
     }]
 }, {
     title: '2 Point',
@@ -14,7 +14,7 @@ export const cards = [{
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
-        type: 'textbox'
+        type: 'icon'
     }, {
         questionId: 2,
         question: 'Assist',
@@ -22,11 +22,11 @@ export const cards = [{
     }, {
         questionId: 3,
         question: 'Assist Number',
-        type: 'textbox'
+        type: 'icon'
     }, {
         questionId: 4,
         question: 'Shot Map',
-        type: 'textbox'
+        type: 'shot'
     }]
 }, {
     title: '3 Point',
@@ -35,7 +35,7 @@ export const cards = [{
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
-        type: 'textbox'
+        type: 'icon'
     }, {
         questionId: 2,
         question: 'Assist',
@@ -43,11 +43,11 @@ export const cards = [{
     }, {
         questionId: 3,
         question: 'Assist Number',
-        type: 'textbox'
+        type: 'icon'
     }, {
         questionId: 4,
         question: 'Shot Map',
-        type: 'textbox'
+        type: 'shot'
     }]
 }, {
     title: 'Block',
@@ -56,7 +56,7 @@ export const cards = [{
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
-        type: 'textbox'
+        type: 'icon'
     }]
 }, {
     title: 'Steal',
@@ -65,11 +65,11 @@ export const cards = [{
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
-        type: 'textbox'
+        type: 'icon'
     }, {
         questionId: 2,
         question: 'From Opponent Player Number',
-        type: 'textbox'
+        type: 'icon'
     }]
 }, {
     title: 'Free Throw Miss',
@@ -78,7 +78,7 @@ export const cards = [{
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
-        type: 'textbox'
+        type: 'icon'
     }, {
         questionId: 2,
         question: 'Type of Rebound',
@@ -86,7 +86,7 @@ export const cards = [{
     }, {
         questionId: 3,
         question: 'Respective Player Number',
-        type: 'textbox'
+        type: 'icon'
     }]
 }, {
     title: '2 Pt Miss',
@@ -95,7 +95,7 @@ export const cards = [{
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
-        type: 'textbox'
+        type: 'icon'
     }, {
         questionId: 2,
         question: 'Type of Rebound',
@@ -103,7 +103,7 @@ export const cards = [{
     }, {
         questionId: 3,
         question: 'Respective Player Number',
-        type: 'textbox'
+        type: 'icon'
     }]
 }, {
     title: '3 Pt Miss',
@@ -112,7 +112,7 @@ export const cards = [{
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
-        type: 'textbox'
+        type: 'icon'
     }, {
         questionId: 2,
         question: 'Type of Rebound',
@@ -120,7 +120,7 @@ export const cards = [{
     }, {
         questionId: 3,
         question: 'Respective Player Number',
-        type: 'textbox'
+        type: 'icon'
     }]
 }, {
     title: 'TurnOver',
@@ -129,11 +129,11 @@ export const cards = [{
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
-        type: 'textbox'
+        type: 'icon'
     },{
         questionId: 2,
         question: 'To Opponent Number',
-        type: 'textbox'
+        type: 'icon'
     }]
 }, {
     title: 'Foul',
@@ -142,6 +142,6 @@ export const cards = [{
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
-        type: 'textbox'
+        type: 'icon'
     }]
 }];

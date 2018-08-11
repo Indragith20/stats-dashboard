@@ -26,14 +26,30 @@
     </div>
     <div class="modal-body">
       <form [formGroup]="modalContent">
-          <div class="col-md-12" *ngFor="let question of modalFormData.controls; let j = index">
+          <div class="col-md-12" style="padding: 5px;" *ngFor="let question of modalFormData.controls; let j = index">
               <ng-container class="row" [formGroup]="question">
+                <div *ngIf="question.get('formType').value === 'icon'">
+                    <div class="row">
+                      <b>{{question.get('question').value}}</b>
+                    </div>
+                    <app-player-number></app-player-number>
+                </div>
                 <div *ngIf="question.get('formType').value === 'textbox'">
-                    {{question.get('question').value}}<input type="text" class="form-control" id="usr">
+                    <div class="row">
+                        <b>{{question.get('question').value}}</b>
+                    </div>
+                    <div class="row">
+                        <input type="text" class="form-control" id="usr">
+                    </div>  
                 </div>
                 <div *ngIf="question.get('formType').value === 'checkbox'">
-                     {{question.get('question').value}}
-                        <input type="checkbox" value="">
+                  <div class="row">
+                    <b style="margin-right: 5px;">{{question.get('question').value}}</b>
+                    <input type="checkbox" value="">
+                  </div>
+                </div>
+                <div *ngIf="question.get('formType').value === 'shot'">
+                  <app-shot-map></app-shot-map>
                 </div>
                
               </ng-container>

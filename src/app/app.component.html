@@ -3,7 +3,16 @@
     <h1>Stats Screen</h1>
   </div>
 </div>
-<div class="row">
+<div class="row" style="margin: 20px;">
+  <div class="col-md-12 text-center">
+    <b>Select the Half</b>
+    <div class="btn-group" role="group" style="margin-left: 10px" aria-label="Basic example">
+        <button type="button" class="btn btn-secondary">First</button>
+        <button type="button" class="btn btn-secondary">Second</button>
+    </div>
+</div>
+
+<div class="row" style="margin-top: 20px;">
   <div class="col-md-6">
     <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
       <ngb-panel title="Team-One">

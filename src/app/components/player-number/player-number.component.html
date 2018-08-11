@@ -1,0 +1,6 @@
+<ng-container *ngFor="let playerNumber of playerJerseyNumbers">
+    <div [ngClass]="{'imageSelectedStyle': playerNumber===selectedPlayer, 'imageDefaultStyle': playerNumber!==selectedPlayer}"
+        (click)="selectPlayer(playerNumber)">
+        {{playerNumber}}
+    </div>
+</ng-container>
