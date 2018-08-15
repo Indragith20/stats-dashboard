@@ -18,6 +18,7 @@ export class TeamOneComponent implements OnInit {
       this.intializeFormValues();
     }
   }
+  @Input() teamDetails: any;
   cardForms: FormGroup;
   cards: any;
   closeResult: string;
@@ -44,7 +45,8 @@ export class TeamOneComponent implements OnInit {
         const questionFormGroup = this.fb.group({
           questionId: [question.questionId],
           question: [question.question],
-          formType: [question.type]
+          formType: [question.type],
+          currentTeam: [question.currentTeam]
         });
         questionFormArray.push(questionFormGroup);
       });
@@ -53,6 +55,7 @@ export class TeamOneComponent implements OnInit {
         clicked: false,
         title: card.title,
         icon: card.icon,
+        isTwoTeamsInvolved: card.isTwoTeamsInvolved,
         questions: questionFormArray
       });
 
@@ -81,13 +84,23 @@ export class TeamOneComponent implements OnInit {
   } */
 
   openDialog(card): void {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      data: {title: card.get('title').value, modalContent: card }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+    //TODO: Uncomment the below code for two team players
+    //if(card.get('isTwoTeamsInvolved').value === true) {
+      const dialogRef = this.dialog.open(DialogComponent, {
+        data: {
+          title: card.get('title').value, 
+          modalContent: card, 
+          selectedTeamId: this.teamDetails.managers.team1[0].team_id,
+          oppositionTeamId: this.teamDetails.managers.team2[0].team_id,
+          selectedTeamPlayers: this.teamDetails.players.team1,
+          oppositionTeamPlayers: this.teamDetails.players.team2
+        }
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+    //}
   }
 
 }
