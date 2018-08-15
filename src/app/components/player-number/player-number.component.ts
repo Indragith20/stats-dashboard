@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-player-number',
   templateUrl: './player-number.component.html',
-  styleUrls: ['./player-number.component.css']
+  styleUrls: ['./player-number.component.scss']
 })
 export class PlayerNumberComponent implements OnInit {
   //TODO: Selected Player Number Should be Unique .Generate the unique value by combining team name and jeysey number

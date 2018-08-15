@@ -2,7 +2,7 @@
   <div class="row">
     <ng-container *ngFor="let card of formData.controls; let i = index">
       <ng-container [formGroup]="card">
-        <div class="col-md-2 col-md-offset-4 cardNormalStyle" (click)="open(content, card)">
+        <div class="col-md-2 col-md-offset-4 cardNormalStyle" (click)="openDialog(card)">
           <div class="row">
               <div class="col-md-12 text-center">
                   <img src="{{card.get('icon').value}}" alt="image" height=50 width=50/>
@@ -17,7 +17,7 @@
   </div>
 </form>
 
-<ng-template #content let-c="close" let-d="dismiss">
+<!-- <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">{{modalHeader}}</h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
@@ -58,4 +58,4 @@
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Update</button>
     </div>
-  </ng-template>
+  </ng-template> -->

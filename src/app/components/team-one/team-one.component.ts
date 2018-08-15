@@ -1,12 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { MatDialog } from '@angular/material';
+import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 
 
 @Component({
   selector: 'app-team-one',
   templateUrl: './team-one.component.html',
-  styleUrls: ['./team-one.component.css']
+  styleUrls: ['./team-one.component.scss']
 })
 export class TeamOneComponent implements OnInit {
   @Input()
@@ -26,7 +28,7 @@ export class TeamOneComponent implements OnInit {
 
   get modalFormData() { return <FormArray>this.modalContent.get('questions'); }
 
-  constructor(private fb: FormBuilder, private modalService: NgbModal) { 
+  constructor(private fb: FormBuilder, private modalService: NgbModal, public dialog: MatDialog) { 
     this.cardForms = this.fb.group({
       team: ['1'],
       cards: new FormArray([])
@@ -58,7 +60,7 @@ export class TeamOneComponent implements OnInit {
     });
   }
 
-  open(content, card) {
+  /* open(content, card) {
     this.modalContent = card;
     this.modalHeader = card.get('title').value;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -66,9 +68,9 @@ export class TeamOneComponent implements OnInit {
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
-  }
+  } */
 
-  private getDismissReason(reason: any): string {
+  /* private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -76,6 +78,16 @@ export class TeamOneComponent implements OnInit {
     } else {
       return  `with: ${reason}`;
     }
+  } */
+
+  openDialog(card): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {title: card.get('title').value, modalContent: card }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
 }

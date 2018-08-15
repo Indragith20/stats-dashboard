@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>{{modalTitle}}</h1>
+<div mat-dialog-content>
+    <form [formGroup]="modalContent">
+        <div class="col-md-12" style="padding: 5px;" *ngFor="let question of modalFormData.controls; let j = index">
+            <ng-container class="row" [formGroup]="question">
+              <div *ngIf="question.get('formType').value === 'icon'">
+                  <div class="row">
+                    <b>{{question.get('question').value}}</b>
+                  </div>
+                  <app-player-number></app-player-number>
+              </div>
+              <div *ngIf="question.get('formType').value === 'textbox'">
+                  <div class="row">
+                      <b>{{question.get('question').value}}</b>
+                  </div>
+                  <div class="row">
+                      <input type="text" class="form-control" id="usr">
+                  </div>  
+              </div>
+              <div *ngIf="question.get('formType').value === 'checkbox'">
+                <div class="row">
+                  <!-- <b style="margin-right: 5px;">{{question.get('question').value}}</b> -->
+                  <!-- <input type="checkbox" value=""> -->
+                  <mat-checkbox><b>{{question.get('question').value}}</b></mat-checkbox>
+                </div>
+              </div>
+              <div *ngIf="question.get('formType').value === 'shot'">
+                <app-shot-map></app-shot-map>
+              </div>
+             
+            </ng-container>
+          </div>
+    </form>
+</div>
+<div class="row" mat-dialog-actions>
+  <div class="col-md-8"></div>
+  <div class="col-md-4">
+      <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="onNoClick()">Update</button>
+  </div>
+</div>

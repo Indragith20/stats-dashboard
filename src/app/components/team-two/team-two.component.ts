@@ -1,11 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { DialogComponent } from '../../shared/components/dialog/dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-team-two',
   templateUrl: './team-two.component.html',
-  styleUrls: ['./team-two.component.css']
+  styleUrls: ['./team-two.component.scss']
 })
 export class TeamTwoComponent implements OnInit {
   @Input()
@@ -25,7 +27,7 @@ export class TeamTwoComponent implements OnInit {
 
   get modalFormData() { return <FormArray>this.modalContent.get('questions'); }
   
-  constructor(private fb: FormBuilder, private modalService: NgbModal) { 
+  constructor(private fb: FormBuilder, private modalService: NgbModal, public dialog: MatDialog) { 
     this.cardForms = this.fb.group({
       team: ['1'],
       cards: new FormArray([])
@@ -58,7 +60,7 @@ export class TeamTwoComponent implements OnInit {
     console.log(this.cardForms);
   }
 
-  open(content, card) {
+  /* open(content, card) {
     this.modalContent = card;
     this.modalHeader = card.get('title').value;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
@@ -76,5 +78,15 @@ export class TeamTwoComponent implements OnInit {
     } else {
       return  `with: ${reason}`;
     }
+  } */
+
+  openDialog(card): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {title: card.get('title').value, modalContent: card }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 }
