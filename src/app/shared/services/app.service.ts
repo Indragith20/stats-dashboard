@@ -8,6 +8,7 @@ export class AppService {
     isAuthenticated: boolean = false;
     matchDetails: any;
     matchDetailsRetrieved: boolean = false;
+    
     constructor(private http: HttpClient) {}
 
     autheticateUser(username: string, password: string) {

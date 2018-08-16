@@ -10,6 +10,7 @@ export class PlayerNumberComponent implements OnInit {
   @Input() 
   set playerInField(playerList: any) {
     if(playerList) {
+      this.playerList = [];
       playerList.map((player) => {
         this.playerList.push({
           jerseyNumber: player.jersey_number,

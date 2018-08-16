@@ -21,9 +21,12 @@ export class DialogComponent {
   modalTitle: string;
   selectedTeamPlayerInField: any;
   oppositionTeamPlayerInField: any;
-  
+  selectedDropDownValue: any;
 
-  get modalFormData() { return <FormArray>this.modalContent.get('questions'); }
+  get modalFormData() { 
+    console.log(this.modalContent.get('questions').value);
+    return <FormArray>this.modalContent.get('questions'); 
+  }
 
   constructor(public dialogRef: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     this.modalContent = data.modalContent;
@@ -34,6 +37,14 @@ export class DialogComponent {
   
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  changeDisplayedPlayers(selectedValue) {
+    console.log(selectedValue);
+    if(selectedValue === 'offensive') {
+      this.oppositionTeamPlayerInField = [];
+      this.oppositionTeamPlayerInField = [...this.selectedTeamPlayerInField];
+    }
   }
 
 }

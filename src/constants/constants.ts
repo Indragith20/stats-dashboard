@@ -102,7 +102,7 @@ export const cards = [{
         questionId: 2,
         question: 'Type of Rebound',
         currentTeam: true,
-        type: 'textbox'
+        type: 'dropdown'
     }, {
         questionId: 3,
         question: 'Respective Player Number',
@@ -123,7 +123,7 @@ export const cards = [{
         questionId: 2,
         question: 'Type of Rebound',
         currentTeam: true,
-        type: 'textbox'
+        type: 'dropdown'
     }, {
         questionId: 3,
         question: 'Respective Player Number',
@@ -144,7 +144,7 @@ export const cards = [{
         questionId: 2,
         question: 'Type of Rebound',
         currentTeam: true,
-        type: 'textbox'
+        type: 'dropdown'
     }, {
         questionId: 3,
         question: 'Respective Player Number',
@@ -175,6 +175,7 @@ export const cards = [{
     questions: [{
         questionId: 1,
         question: 'Enter Player Number',
-        type: 'icon'
+        type: 'icon',
+        currentTeam: true,
     }]
 }];

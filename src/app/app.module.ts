@@ -14,12 +14,14 @@ import { LoginComponent } from './components/login/login.component';
 import { routing } from './app-routing.module';
 import { StatsScreenComponent } from './components/stats-screen/stats-screen.component';
 import { AppService } from './shared/services/app.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MyOwnCustomMaterialModule } from './app-material.module';
 import { DialogComponent } from './shared/components/dialog/dialog.component';
 import { OtpLoginComponent } from './components/otp-login/otp-login.component';
 import { SnackbarComponent } from './shared/components/snackbar/snackbar.component';
 import { AuthGuardService } from './shared/services/auth-guard.service';
+import { CustomHttpinterceptor } from './shared/services/interceptor';
+import { LoaderComponent } from './shared/components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { AuthGuardService } from './shared/services/auth-guard.service';
     StatsScreenComponent,
     DialogComponent,
     OtpLoginComponent,
-    SnackbarComponent
+    SnackbarComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -44,8 +47,8 @@ import { AuthGuardService } from './shared/services/auth-guard.service';
     BrowserAnimationsModule,
     MyOwnCustomMaterialModule
   ],
-  providers: [AppService, AuthGuardService],
-  entryComponents: [DialogComponent, SnackbarComponent],
+  providers: [AppService, AuthGuardService, { provide: HTTP_INTERCEPTORS, useClass: CustomHttpinterceptor, multi: true }],
+  entryComponents: [DialogComponent, SnackbarComponent, LoaderComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
