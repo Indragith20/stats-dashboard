@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-player-number',
@@ -14,23 +14,33 @@ export class PlayerNumberComponent implements OnInit {
       playerList.map((player) => {
         this.playerList.push({
           jerseyNumber: player.jersey_number,
-          playerName: player.name
+          playerName: player.name,
+          khelId: player.player_id
         })
       })
     }
   }
+  @Input() containerID: any;
+  @Input() questionId: any;
+  @Output() playerSelected = new EventEmitter<any>();
   playerList: any[] = [];
   selectedPlayer: number;
   constructor() { }
 
-  ngOnInit() {
-    // for(let i = 1; i<12; i++) {
-    //   this.playerJerseyNumbers.push(i);
-    // }
-  }
+  ngOnInit() {}
 
-  selectPlayer(playerNumber) {
-    this.selectedPlayer = playerNumber;
+  selectPlayer(player) {
+    this.selectedPlayer = player.jerseyNumber;
+    const dataToBePassed = {
+      containerId: this.containerID,
+      questionId: this.questionId,
+      selectedPlayer: {
+        jerseyNumber: player.jerseyNumber,
+        playerName: player.playerName,
+        khelId: player.khelId
+      }
+    };
+    this.playerSelected.emit(dataToBePassed);
   }
 
 }

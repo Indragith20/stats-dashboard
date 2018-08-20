@@ -7,11 +7,15 @@
                   <div class="row">
                     <b>{{question.get('question').value}}</b>
                   </div>
-                  <ng-container *ngIf="question.get('currentTeam').value === true">
-                    <app-player-number [playerInField]="selectedTeamPlayerInField"></app-player-number>
+                  <ng-container *ngIf="question.get('currentTeam').value === true || selectedReboundValue === 'offensive'">
+                    <app-player-number [containerID]="1" [questionId]="question.get('questionId').value"
+                      [playerInField]="selectedTeamPlayerInField" (playerSelected)="changeSelectedPlayer($event)"></app-player-number>
                   </ng-container>
                   <ng-container *ngIf="question.get('currentTeam').value === false">
-                    <app-player-number [playerInField]="oppositionTeamPlayerInField"></app-player-number>
+                    <!-- <app-player-number *ngIf="selectedReboundValue === 'offensive'" [containerID]="2" [questionId]="question.get('questionId').value"
+                      [playerInField]="selectedTeamPlayerInField" (playerSelected)="changeSelectedPlayer($event)"></app-player-number> -->
+                    <app-player-number *ngIf="selectedReboundValue === 'defensive'" [containerID]="2"
+                      [playerInField]="oppositionTeamPlayerInField" (playerSelected)="changeSelectedPlayer($event)"></app-player-number>
                   </ng-container>
                   <ng-container>
 
@@ -36,7 +40,7 @@
                 <div class="row">
                   <!-- <b style="margin-right: 5px;">{{question.get('question').value}}</b> -->
                   <!-- <input type="checkbox" value=""> -->
-                  <mat-checkbox><b>{{question.get('question').value}}</b></mat-checkbox>
+                  <mat-checkbox (change)="changeIsAssistValue($event)"><b>{{question.get('question').value}}</b></mat-checkbox>
                 </div>
               </div>
               <div *ngIf="question.get('formType').value === 'shot'">
@@ -50,7 +54,7 @@
 <div class="row" mat-dialog-actions>
   <div class="col-md-9 col-md-offest-8"></div>
   <div class="col-md-3">
-      <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button (click)="onNoClick()">Update</button>
+      <button mat-button (click)="onCancelClick()">Cancel</button>
+    <button mat-button (click)="onUpdateClick()">Update</button>
   </div>
 </div>

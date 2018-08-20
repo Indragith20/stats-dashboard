@@ -16,6 +16,9 @@ export class OtpLoginComponent implements OnInit {
   ngOnInit() {}
 
   getMatchData() {
+    this.loginService.getProfileDetails().then((data) => {
+      console.log(data);
+    });
     this.loginService.getMatchDetailsByID(this.enteredOtp ? this.enteredOtp : 'MAT23924')
         .then((data: any) => {
           console.log(data);

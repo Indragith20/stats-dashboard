@@ -21,10 +21,15 @@ export class DialogComponent {
   modalTitle: string;
   selectedTeamPlayerInField: any;
   oppositionTeamPlayerInField: any;
-  selectedDropDownValue: any;
+  selectedTeamPlayer: any[] = [];
+  selectedOppositionPlayer: any[] = [];
+  selectedCoordinates: any;
+
+  selectedReboundValue: any = 'none';
+  isAssist: any = false;
+  player: any;
 
   get modalFormData() { 
-    console.log(this.modalContent.get('questions').value);
     return <FormArray>this.modalContent.get('questions'); 
   }
 
@@ -35,16 +40,33 @@ export class DialogComponent {
     this.oppositionTeamPlayerInField = data.oppositionTeamPlayers.filter(player => player.is_substitute === false);
   }
   
-  onNoClick(): void {
-    this.dialogRef.close();
+  onUpdateClick(): void {
+    this.dialogRef.close(true);
+  }
+
+  onCancelClick(): void {
+    this.dialogRef.close(false);
   }
 
   changeDisplayedPlayers(selectedValue) {
-    console.log(selectedValue);
-    if(selectedValue === 'offensive') {
-      this.oppositionTeamPlayerInField = [];
-      this.oppositionTeamPlayerInField = [...this.selectedTeamPlayerInField];
+    this.selectedReboundValue = selectedValue;
+  }
+
+  changeIsAssistValue(selectedValue) {
+    this.isAssist = selectedValue.checked;
+  }
+
+  changeSelectedPlayer(playerDet: any) {
+    if(playerDet.containerId === 1) {
+      if(playerDet.questionId > 1) {
+         this.player = {...this.player, player2: playerDet.selectedPlayer };
+      } else {
+        this.player = {...this.player, player1: playerDet.selectedPlayer };
+      }
+    } else {
+      this.player = {...this.player, oppositionPlayer: playerDet.selectedPlayer}
     }
+    console.log(this.player);
   }
 
 }

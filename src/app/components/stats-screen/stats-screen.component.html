@@ -27,7 +27,9 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
     
-        <app-team-one [cardDetails]="cardQuestions" [teamDetails]="matchDetails"></app-team-one>
+        <app-team-one [cardDetails]="cardQuestions" [periodCount]="periodCount"
+          [referreeData]="referredProfileData" [teamDetails]="matchDetails"
+          (updateStatsData)="updateStatsData($event)"></app-team-one>
       </mat-expansion-panel>
     </mat-accordion>
   </div>
@@ -40,7 +42,9 @@
           </mat-panel-title>
         </mat-expansion-panel-header>
     
-        <app-team-two [cardDetails]="cardQuestions" [teamDetails]="matchDetails"></app-team-two>
+        <app-team-two [cardDetails]="cardQuestions" [periodCount]="periodCount"
+          [referreeData]="referredProfileData" [teamDetails]="matchDetails"
+          (updateStatsData)="updateStatsData($event)"></app-team-two>
       </mat-expansion-panel>
     </mat-accordion>
     </div>
