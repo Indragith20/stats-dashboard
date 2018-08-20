@@ -14,7 +14,7 @@
                   <ng-container *ngIf="question.get('currentTeam').value === false">
                     <!-- <app-player-number *ngIf="selectedReboundValue === 'offensive'" [containerID]="2" [questionId]="question.get('questionId').value"
                       [playerInField]="selectedTeamPlayerInField" (playerSelected)="changeSelectedPlayer($event)"></app-player-number> -->
-                    <app-player-number *ngIf="selectedReboundValue === 'defensive'" [containerID]="2"
+                    <app-player-number *ngIf="selectedReboundValue === 'defensive' || selectedReboundValue === 'none'" [containerID]="2"
                       [playerInField]="oppositionTeamPlayerInField" (playerSelected)="changeSelectedPlayer($event)"></app-player-number>
                   </ng-container>
                   <ng-container>

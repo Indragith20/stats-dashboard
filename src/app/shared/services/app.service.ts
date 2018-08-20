@@ -21,7 +21,7 @@ export class AppService {
         body.append('referee_id', 'PID01511');
         body.append('category', 'STATS');
         body.append('match_id', matchId);
-        const url = `${EndpointsEnum.GLOBAL_CORE_URL}ManageMatches/getMatchdata`;
+        const url = `${EndpointsEnum.GLOBAL_CORE_URL}ManageMatches/getStatsMatchdata`;
         return new Promise((resolve, reject)=> {
             this.sendRequest(url, body).subscribe((data: any) => {
                 if (data) {
@@ -38,16 +38,20 @@ export class AppService {
 
     updateMatchStatData(timeline: any) {
         let body = new FormData();
-        let data = {
-            "referee_id": this.referreeDetails.profileId,
-            "referee_khel_id": this.referreeDetails.uniqueId,
-            "match_id": this.matchIdentifier,
-            "timeline": timeline
-        };
+        // let dataToBeSent = {
+        //     "referee_id": this.referreeDetails.profileId,
+        //     "referee_khel_id": this.referreeDetails.uniqueId,
+        //     "match_id": this.matchIdentifier,
+        //     "timeline": timeline
+        // };
+        body.append('referee_id', this.referreeDetails.profileId);
+        body.append('referee_khel_id', this.referreeDetails.uniqueId);
+        body.append('match_id', this.matchIdentifier);
+        body.append('timeline', JSON.stringify(timeline));
         console.log(timeline);
         const url = `${EndpointsEnum.GLOBAL_CORE_URL}ManageExternalMatches/stats_keeper_update`
         return new Promise((resolve, reject) => {
-            this.http.post(url, data).subscribe((data: any) => {
+            this.http.post(url, body, {headers: this.headers}).subscribe((data: any) => {
                 if(data.status === 'success') {
                     resolve(data);
                 } else {
