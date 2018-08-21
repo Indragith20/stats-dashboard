@@ -1,9 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
-import { AppService } from '../../shared/services/app.service';
 
 
 @Component({
@@ -35,8 +33,7 @@ export class TeamOneComponent implements OnInit {
 
   get modalFormData() { return <FormArray>this.modalContent.get('questions'); }
 
-  constructor(private fb: FormBuilder, private modalService: NgbModal, 
-              public dialog: MatDialog, private appService: AppService) { 
+  constructor(private fb: FormBuilder, public dialog: MatDialog) { 
     this.cardForms = this.fb.group({
       team: ['1'],
       cards: new FormArray([])
@@ -320,7 +317,7 @@ export class TeamOneComponent implements OnInit {
         "assist_by": asssit_khelid,
         "by": asssit_khelid,
       };
-      setTimeout(function () {
+      setTimeout(() => {
         this.updateStatsData.emit(time_stamp);
       }, 1000);
     }
@@ -336,7 +333,7 @@ export class TeamOneComponent implements OnInit {
       "offensive_rebound_by": khelId,
       "by": khelId,
     };
-    setTimeout(function () {
+    setTimeout(() => {
       this.updateStatsData.emit(time_stamp);
     }, 1000);
   }
@@ -351,7 +348,7 @@ export class TeamOneComponent implements OnInit {
       "defensive_rebound_by": khelId,
       "by": khelId,
     };
-    setTimeout(function () {
+    setTimeout(() => {
       this.updateStatsData.emit(time_stamp);
     }, 1000);
   }

@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
@@ -41,7 +40,6 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    NgbModule.forRoot(),
     routing,
     HttpClientModule,
     BrowserAnimationsModule,

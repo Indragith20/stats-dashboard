@@ -6,7 +6,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./player-number.component.scss']
 })
 export class PlayerNumberComponent implements OnInit {
-  //TODO: Selected Player Number Should be Unique .Generate the unique value by combining team name and jeysey number
   @Input() 
   set playerInField(playerList: any) {
     if(playerList) {

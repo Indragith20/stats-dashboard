@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { EndpointsEnum } from '../constants/endpoints';
 
@@ -36,22 +36,19 @@ export class AppService {
         });
     }
 
-    updateMatchStatData(timeline: any) {
+    updateMatchStatData(timelineData: any) {
         let body = new FormData();
-        // let dataToBeSent = {
-        //     "referee_id": this.referreeDetails.profileId,
-        //     "referee_khel_id": this.referreeDetails.uniqueId,
-        //     "match_id": this.matchIdentifier,
-        //     "timeline": timeline
-        // };
         body.append('referee_id', this.referreeDetails.profileId);
         body.append('referee_khel_id', this.referreeDetails.uniqueId);
         body.append('match_id', this.matchIdentifier);
-        body.append('timeline', JSON.stringify(timeline));
-        console.log(timeline);
+        Object.keys(timelineData).map((key) => {
+            const keyTobeSet = 'timeline['+key+']';
+            console.log(keyTobeSet);
+            body.append(keyTobeSet, timelineData[key]);
+        });
         const url = `${EndpointsEnum.GLOBAL_CORE_URL}ManageExternalMatches/stats_keeper_update`
         return new Promise((resolve, reject) => {
-            this.http.post(url, body, {headers: this.headers}).subscribe((data: any) => {
+            this.sendRequest(url, body).subscribe((data: any) => {
                 if(data.status === 'success') {
                     resolve(data);
                 } else {

@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { DialogComponent } from '../../shared/components/dialog/dialog.component';
 import { MatDialog } from '@angular/material';
 
@@ -32,7 +31,7 @@ export class TeamTwoComponent implements OnInit {
 
   get modalFormData() { return <FormArray>this.modalContent.get('questions'); }
   
-  constructor(private fb: FormBuilder, private modalService: NgbModal, public dialog: MatDialog) { 
+  constructor(private fb: FormBuilder, public dialog: MatDialog) { 
     this.cardForms = this.fb.group({
       team: ['1'],
       cards: new FormArray([])
@@ -67,47 +66,24 @@ export class TeamTwoComponent implements OnInit {
     console.log(this.cardForms);
   }
 
-  /* open(content, card) {
-    this.modalContent = card;
-    this.modalHeader = card.get('title').value;
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
-  }
-
-  private getDismissReason(reason: any): string {
-    if (reason === ModalDismissReasons.ESC) {
-      return 'by pressing ESC';
-    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-      return 'by clicking on a backdrop';
-    } else {
-      return  `with: ${reason}`;
-    }
-  } */
-
   openDialog(card): void {
-    //TODO: Uncomment the below code for two team players
-    //if(card.get('isTwoTeamsInvolved').value === true) {
-      const dialogRef = this.dialog.open(DialogComponent, {
-        data: {
-          title: card.get('title').value, 
-          modalContent: card, 
-          selectedTeamId: this.teamDetails.managers.team2[0].team_id,
-          oppositionTeamId: this.teamDetails.managers.team1[0].team_id,
-          selectedTeamPlayers: this.teamDetails.players.team2,
-          oppositionTeamPlayers: this.teamDetails.players.team1
-        }
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        console.log('The dialog was closed');
-        if(result) {
-          this.createStatsData(dialogRef.componentInstance);
-        }
-      });
-    //}
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: {
+        title: card.get('title').value,
+        modalContent: card,
+        selectedTeamId: this.teamDetails.managers.team2[0].team_id,
+        oppositionTeamId: this.teamDetails.managers.team1[0].team_id,
+        selectedTeamPlayers: this.teamDetails.players.team2,
+        oppositionTeamPlayers: this.teamDetails.players.team1
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      if (result) {
+        this.createStatsData(dialogRef.componentInstance);
+      }
+    });
   }
 
   createStatsData(statsData) {
@@ -339,7 +315,7 @@ export class TeamTwoComponent implements OnInit {
         "assist_by": asssit_khelid,
         "by": asssit_khelid,
       };
-      setTimeout(function () {
+      setTimeout(() => {
         this.updateStatsData.emit(time_stamp);
       }, 1000);
     }
@@ -355,7 +331,7 @@ export class TeamTwoComponent implements OnInit {
       "offensive_rebound_by": khelId,
       "by": khelId,
     };
-    setTimeout(function () {
+    setTimeout(() => {
       this.updateStatsData.emit(time_stamp);
     }, 1000);
   }
@@ -370,7 +346,7 @@ export class TeamTwoComponent implements OnInit {
       "defensive_rebound_by": khelId,
       "by": khelId,
     };
-    setTimeout(function () {
+    setTimeout(() => {
       this.updateStatsData.emit(time_stamp);
     }, 1000);
   }
