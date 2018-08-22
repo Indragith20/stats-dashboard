@@ -1,0 +1,29 @@
+<ng-container>
+  <div class="row">
+    <div class="col-md-12">
+      <mat-card>
+        <mat-card-title>
+          <div class="row">
+            <div class="col-md-6 text-center border-style">
+              <span class="font-style">{{cardContent ? cardContent.teamOneAcronym : ''}}</span>
+            </div>
+            <div class="col-md-6 text-center">
+              <span class="font-style">{{cardContent ? cardContent.teamTwoAcronym : ''}}</span>
+            </div>
+          </div>
+        </mat-card-title>
+        <hr />
+        <mat-card-content>
+          <div class="row">
+              <div class="col-md-6 text-center border-style" *ngIf="cardContent">
+                <span class="font-content-style">{{cardContent.teamOneScore ? cardContent.teamOneScore : cardContent.teamOneFouls}}</span>
+              </div>
+              <div class="col-md-6 text-center">
+                <span class="font-content-style">{{cardContent.teamTwoScore ? cardContent.teamTwoScore : cardContent.teamTwoFouls}}</span>
+              </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</ng-container>

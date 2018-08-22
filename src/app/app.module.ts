@@ -21,6 +21,7 @@ import { SnackbarComponent } from './shared/components/snackbar/snackbar.compone
 import { AuthGuardService } from './shared/services/auth-guard.service';
 import { CustomHttpinterceptor } from './shared/services/interceptor';
 import { LoaderComponent } from './shared/components/loader/loader.component';
+import { ScoreCardComponent } from './components/score-card/score-card.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
     DialogComponent,
     OtpLoginComponent,
     SnackbarComponent,
-    LoaderComponent
+    LoaderComponent,
+    ScoreCardComponent
   ],
   imports: [
     BrowserModule,

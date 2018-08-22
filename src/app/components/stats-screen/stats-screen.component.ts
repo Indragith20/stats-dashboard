@@ -17,6 +17,11 @@ export class StatsScreenComponent implements OnInit {
   referreeDetails: any;
   referredProfileData: any;
   periodCount: number = 1;
+  teamOneAcronym: string;
+  teamTwoAcronym: string;
+  scoreCardContent: any;
+  foulsContent: any;
+
   constructor(private appService: AppService, private snackBar: MatSnackBar) {
     this.cardQuestions = cards;
   }
@@ -33,8 +38,33 @@ export class StatsScreenComponent implements OnInit {
         refereeKhelId: this.referreeDetails ? this.referreeDetails.uniqueId: '',
         refereeUserName: this.referreeDetails ? this.referreeDetails.userName : '',
       };
-      console.log(this.teamOne.team_name);
+      this.getScoreCardDetails();
     }
+  }
+
+  getScoreCardDetails() {
+    const teamOneName = this.teamOne ? this.teamOne.team_name : '';
+    this.teamOneAcronym = teamOneName.split(/\s/).reduce((response,word)=> response+=word.slice(0,1),'');
+    const teamTwoName = this.teamTwo ? this.teamTwo.team_name : '';
+    this.teamTwoAcronym = teamTwoName.split(/\s/).reduce((response,word)=> response+=word.slice(0,1),'');
+    //TODO: Remove the below hardcoded Score values with real stats data
+    const teamOneScore = 30;
+    const teamTwoScore = 16;
+    this.scoreCardContent = {
+      teamOneAcronym: this.teamOneAcronym,
+      teamTwoAcronym: this.teamTwoAcronym,
+      teamOneScore: teamOneScore,
+      teamTwoScore: teamTwoScore
+    };
+    //TODO: Remove the below hardcoded Foul values with real stats data
+    const teamOneFouls = 30;
+    const teamTwoFouls = 16;
+    this.foulsContent = {
+      teamOneAcronym: this.teamOneAcronym,
+      teamTwoAcronym: this.teamTwoAcronym,
+      teamOneFouls: teamOneFouls,
+      teamTwoFouls: teamTwoFouls
+    };
   }
 
   updateStatsData(statsData) {

@@ -1,15 +1,44 @@
 <div class="mat-app-background basic-container">
-<div class="row">
-  <div class="col-md-12 text-center">
-    <h1>Stats Screen</h1>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 text-center">
+      <h1>Stats Screen</h1>
+    </div>
+    <div class="col-md-4" style="margin-right: 10px;">
+      <button class="pull-right" mat-button>Refresh</button>
+    </div>
   </div>
-</div>
 <div class="row" style="margin: 20px;">
-  <div class="col-md-12 text-center">
+  <div class="col-md-3">
+    <mat-accordion>
+        <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+              <b>Score Card</b>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-score-card [cardContent]="scoreCardContent"></app-score-card>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <div class="col-md-6 text-center">
     <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
         <mat-button-toggle value="bold">First Half</mat-button-toggle>
         <mat-button-toggle value="underline">Second Half</mat-button-toggle>
     </mat-button-toggle-group>
+  </div>
+  <div class="col-md-3">
+      <mat-accordion>
+          <mat-expansion-panel>
+          <mat-expansion-panel-header>
+              <mat-panel-title>
+                <b>Fouls</b>
+              </mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-score-card [cardContent]="foulsContent"></app-score-card>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
 </div>
 
 <div class="row" style="margin-top: 20px;">
