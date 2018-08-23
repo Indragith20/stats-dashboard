@@ -1,44 +1,45 @@
 <div class="mat-app-background basic-container">
   <div class="row">
-    <div class="col-md-4"></div>
+    <div class="col-md-4" style="margin-left: 10px;margin-top: 10px;">
+      <button mat-stroked-button mat-tooltip="Undo">
+        Undo Stats
+      </button>
+    </div>
     <div class="col-md-4 text-center">
       <h1>Stats Screen</h1>
     </div>
-    <div class="col-md-4" style="margin-right: 10px;">
-      <button class="pull-right" mat-button>Refresh</button>
+    <div class="col-md-3" style="margin-left: 10px;margin-top: 10px;">
+      <button class="pull-right" mat-stroked-button mat-tooltip="Undo">
+        View Full Stats
+      </button>
     </div>
   </div>
 <div class="row" style="margin: 20px;">
-  <div class="col-md-3">
-    <mat-accordion>
-        <mat-expansion-panel>
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-              <b>Score Card</b>
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <app-score-card [cardContent]="scoreCardContent"></app-score-card>
-      </mat-expansion-panel>
-    </mat-accordion>
+  <div class="col-md-3 text-center">
+    <span><b>ScoreCard</b></span>
+    <app-score-card [cardContent]="scoreCardContent"></app-score-card>
   </div>
-  <div class="col-md-6 text-center">
-    <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-        <mat-button-toggle value="bold">First Half</mat-button-toggle>
-        <mat-button-toggle value="underline">Second Half</mat-button-toggle>
-    </mat-button-toggle-group>
-  </div>
-  <div class="col-md-3">
-      <mat-accordion>
-          <mat-expansion-panel>
-          <mat-expansion-panel-header>
-              <mat-panel-title>
-                <b>Fouls</b>
-              </mat-panel-title>
-          </mat-expansion-panel-header>
-          <app-score-card [cardContent]="foulsContent"></app-score-card>
-        </mat-expansion-panel>
-      </mat-accordion>
+  <div class="col-md-6">
+    <div class="row text-center" style="display: flex; align-items: center;justify-content: center">
+      <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+          <mat-button-toggle value="bold">First Half</mat-button-toggle>
+          <mat-button-toggle value="underline">Second Half</mat-button-toggle>
+      </mat-button-toggle-group>
     </div>
+    <div class="row" style="margin: 10px;">
+      <div class="col-md-4"></div>
+      <div class="col-md-4">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Period Count">
+          </mat-form-field>
+      </div>
+      <div class="col-md-4"></div>
+    </div>
+  </div>
+  <div class="col-md-3 text-center">
+    <span><b>Fouls</b></span>
+    <app-score-card [cardContent]="foulsContent"></app-score-card>
+  </div>
 </div>
 
 <div class="row" style="margin-top: 20px;">
@@ -46,11 +47,10 @@
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
-          <mat-panel-title style="text-transform: capitalize">
+          <mat-panel-title style="text-transform: capitalize; text-align: center">
             <b>{{teamOne ? teamOne.team_name : 'Team One'}}</b>
           </mat-panel-title>
         </mat-expansion-panel-header>
-    
         <app-team-one [cardDetails]="cardQuestions" [periodCount]="periodCount"
           [referreeData]="referredProfileData" [teamDetails]="matchDetails"
           (updateStatsData)="updateStatsData($event)"></app-team-one>

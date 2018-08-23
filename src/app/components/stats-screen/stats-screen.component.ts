@@ -87,4 +87,12 @@ export class StatsScreenComponent implements OnInit {
     })
   }
 
+  viewTeamOneStats(event) {
+    event.preventDefault();
+  }
+
+  viewTeamTwoStats(event) {
+    event.preventDefault();
+  }
+
 }
