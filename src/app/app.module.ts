@@ -22,6 +22,7 @@ import { AuthGuardService } from './shared/services/auth-guard.service';
 import { CustomHttpinterceptor } from './shared/services/interceptor';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ScoreCardComponent } from './components/score-card/score-card.component';
+import { SpeedDialFabComponent } from './shared/components/speed-dial-fab/speed-dial-fab.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { ScoreCardComponent } from './components/score-card/score-card.component
     OtpLoginComponent,
     SnackbarComponent,
     LoaderComponent,
-    ScoreCardComponent
+    ScoreCardComponent,
+    SpeedDialFabComponent
   ],
   imports: [
     BrowserModule,
