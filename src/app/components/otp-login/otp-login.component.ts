@@ -30,7 +30,7 @@ export class OtpLoginComponent implements OnInit {
               verticalPosition: 'top'
             });
           } else {
-            this.router.navigateByUrl('/stats-dashboard');
+            this.router.navigateByUrl('/jersey-picker');
           }
         })
         .catch((err) => {
