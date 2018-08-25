@@ -7,7 +7,9 @@
     <button *ngFor="let btn of buttons"
             mat-mini-fab
             class="fab-secondary"
-            color="secondary" matTooltip="{{btn.icon}}" matTooltipPosition="left" matTooltipClass="toot-tip">
+            color="secondary" matTooltip="{{btn.toolTip}}" 
+            matTooltipPosition="left" matTooltipClass="toot-tip"
+            (click)="loadComponent(btn.component)">
       <i class="material-icons">{{btn.icon}}</i>
     </button>
   </div>

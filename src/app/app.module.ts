@@ -23,6 +23,7 @@ import { CustomHttpinterceptor } from './shared/services/interceptor';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ScoreCardComponent } from './components/score-card/score-card.component';
 import { SpeedDialFabComponent } from './shared/components/speed-dial-fab/speed-dial-fab.component';
+import { TimeLineComponent } from './components/time-line/time-line.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { SpeedDialFabComponent } from './shared/components/speed-dial-fab/speed-
     SnackbarComponent,
     LoaderComponent,
     ScoreCardComponent,
-    SpeedDialFabComponent
+    SpeedDialFabComponent,
+    TimeLineComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +52,7 @@ import { SpeedDialFabComponent } from './shared/components/speed-dial-fab/speed-
     MyOwnCustomMaterialModule
   ],
   providers: [AppService, AuthGuardService, { provide: HTTP_INTERCEPTORS, useClass: CustomHttpinterceptor, multi: true }],
-  entryComponents: [DialogComponent, SnackbarComponent, LoaderComponent],
+  entryComponents: [DialogComponent, SnackbarComponent, LoaderComponent, TimeLineComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

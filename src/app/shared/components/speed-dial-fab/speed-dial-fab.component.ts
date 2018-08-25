@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { speedDialFabAnimations } from './speed-dial-fab.animations';
 
 @Component({
@@ -8,22 +8,28 @@ import { speedDialFabAnimations } from './speed-dial-fab.animations';
   animations: speedDialFabAnimations
 })
 export class SpeedDialFabComponent {
+@Output() loadDialogComponent = new EventEmitter<string>();
 
   fabButtons = [
     {
-      icon: 'timeline'
+      icon: 'timeline',
+      toolTip: 'Timeline',
+      component: 'TimeLineComponent'
     },
     {
-      icon: 'view_headline'
+      icon: 'view_headline',
+      toolTip: 'View Stats',
+      component: 'TimeLineComponent'
     },
     {
-      icon: 'room'
+      icon: 'room',
+      toolTip: 'Room',
+      component: 'TimeLineComponent'
     },
     {
-      icon: 'lightbulb_outline'
-    },
-    {
-      icon: 'lock'
+      icon: 'lock',
+      toolTip: 'Lock',
+      component: 'TimeLineComponent'
     }
   ];
   buttons = [];
@@ -43,5 +49,9 @@ export class SpeedDialFabComponent {
 
   onToggleFab() {
     this.buttons.length ? this.hideItems() : this.showItems();
+  }
+
+  loadComponent(componentName) {
+    this.loadDialogComponent.emit(componentName);
   }
 }

@@ -2,14 +2,14 @@
   <div class="row">
     <div class="col-md-4" style="margin-left: 10px;margin-top: 10px;">
       <button mat-stroked-button mat-tooltip="Undo">
-        Undo Stats
+        <i class="material-icons">undo</i>Undo Stats
       </button>
     </div>
     <div class="col-md-4 text-center">
       <h1>Stats Screen</h1>
     </div>
     <div class="col-md-3" style="margin-left: 10px;margin-top: 10px;">
-      <app-speed-dial-fab></app-speed-dial-fab>
+      <app-speed-dial-fab (loadDialogComponent)="loadComponent($event)"></app-speed-dial-fab>
     </div>
   </div>
 <div class="row" style="margin: 20px;">
