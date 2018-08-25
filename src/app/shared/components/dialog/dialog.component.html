@@ -1,4 +1,7 @@
-<h1 mat-dialog-title>{{modalTitle}}</h1>
+<h1 mat-dialog-title class="headingStyle"
+  [ngStyle]="{'background-color': modalTitleColor,'color': white}">
+  {{modalTitle}}
+</h1>
 <div mat-dialog-content>
     <form [formGroup]="modalContent">
         <div class="col-md-12" style="padding: 5px;" *ngFor="let question of modalFormData.controls; let j = index">
@@ -51,10 +54,7 @@
           </div>
     </form>
 </div>
-<div class="row" mat-dialog-actions>
-  <div class="col-md-9 col-md-offest-8"></div>
-  <div class="col-md-3">
-      <button mat-button (click)="onCancelClick()">Cancel</button>
-    <button mat-button (click)="onUpdateClick()">Update</button>
-  </div>
+<div class="row actionStyle" mat-dialog-actions>
+  <button mat-button (click)="onCancelClick()">Cancel</button>
+  <button mat-button (click)="onUpdateClick()">Update</button>
 </div>

@@ -20,6 +20,7 @@ export class TeamOneComponent implements OnInit {
   @Input() teamDetails: any;
   @Input() referreeData : any;
   @Input() periodCount: any;
+  @Input() jerseyColor: any;
   @Output() updateStatsData = new EventEmitter<any>();
   cardForms: FormGroup;
   cards: any;
@@ -76,7 +77,8 @@ export class TeamOneComponent implements OnInit {
         selectedTeamId: this.teamDetails.managers.team1[0].team_id,
         oppositionTeamId: this.teamDetails.managers.team2[0].team_id,
         selectedTeamPlayers: this.teamDetails.players.team1,
-        oppositionTeamPlayers: this.teamDetails.players.team2
+        oppositionTeamPlayers: this.teamDetails.players.team2,
+        modalTitleColor: this.jerseyColor
       }
     });
 

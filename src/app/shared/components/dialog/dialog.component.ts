@@ -9,6 +9,7 @@ export interface DialogData {
     oppositionTeamId: any;
     selectedTeamPlayers: any;
     oppositionTeamPlayers: any;
+    modalTitleColor: any;
 }
 
 @Component({
@@ -28,6 +29,7 @@ export class DialogComponent {
   selectedReboundValue: any = 'none';
   isAssist: any = false;
   player: any;
+  modalTitleColor: any;
 
   get modalFormData() { 
     return <FormArray>this.modalContent.get('questions'); 
@@ -36,6 +38,7 @@ export class DialogComponent {
   constructor(public dialogRef: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     this.modalContent = data.modalContent;
     this.modalTitle = data.title;
+    this.modalTitleColor = data.modalTitleColor;
     this.selectedTeamPlayerInField = data.selectedTeamPlayers.filter(player => player.is_substitute === false);
     this.oppositionTeamPlayerInField = data.oppositionTeamPlayers.filter(player => player.is_substitute === false);
   }
