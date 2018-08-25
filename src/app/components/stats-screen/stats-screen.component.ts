@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { cards } from '../../../constants/constants';
 import { AppService } from '../../shared/services/app.service';
-import {MatSnackBar} from '@angular/material';
+import { MatSnackBar, MatDialog, MatDialogRef } from '@angular/material';
 import { SnackbarComponent } from '../../shared/components/snackbar/snackbar.component';
+import { TimeLineComponent } from '../time-line/time-line.component';
+import { DetailedStatsComponent } from '../detailed-stats/detailed-stats.component';
 
 @Component({
   selector: 'app-stats-screen',
@@ -21,8 +23,10 @@ export class StatsScreenComponent implements OnInit {
   teamTwoAcronym: string;
   scoreCardContent: any;
   foulsContent: any;
+  currentMatchId: string;
+  matchDet: any;
 
-  constructor(private appService: AppService, private snackBar: MatSnackBar) {
+  constructor(private appService: AppService, private snackBar: MatSnackBar, private dialog: MatDialog) {
     this.cardQuestions = cards;
   }
 
@@ -39,6 +43,7 @@ export class StatsScreenComponent implements OnInit {
         refereeUserName: this.referreeDetails ? this.referreeDetails.userName : '',
       };
       this.getScoreCardDetails();
+      this.currentMatchId = this.appService.matchIdentifier;
     }
   }
 
@@ -84,7 +89,58 @@ export class StatsScreenComponent implements OnInit {
         horizontalPosition: 'right',
         verticalPosition: 'top'
       });
-    })
+    });
+  }
+
+  loadComponent(componentName) {
+    let dialogRef: MatDialogRef<any>
+    switch(componentName) {
+      case 'TimeLineComponent': {
+        this.getTimeLine().then((matchDet) => {
+          const fulltimelineData = matchDet.match_stats_timeline;
+          const refereeUniqueId = this.appService.referreeDetails ? this.appService.referreeDetails.uniqueId : '';
+          const currentTimeLine = fulltimelineData[refereeUniqueId];
+          dialogRef = this.dialog.open(TimeLineComponent, {data: {timeline: currentTimeLine }});
+          dialogRef.afterClosed().subscribe(() => {
+            console.log('dialog closed');
+          });
+        }).catch((err) => {
+          this.snackBar.openFromComponent(SnackbarComponent, {
+            data: err,
+            duration: 5000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          }); 
+        });
+        break;
+      }
+      case 'DetailedStatsComponent': {
+        const playersList = this.matchDetails.players;
+        dialogRef = this.dialog.open(DetailedStatsComponent, { data: { playersList: playersList } });
+        dialogRef.afterClosed().subscribe(() => {
+          console.log('dialog closed');
+        });
+      }
+      default:
+        break;
+    }
+  }
+
+  getTimeLine(): Promise<any> {
+    this.currentMatchId = this.appService.matchIdentifier;
+    return new Promise((resolve, reject) => {
+      this.appService.getMatchDetailsByID(this.currentMatchId).then((data: any) => {
+          if(data.message.length > 0) {
+            this.matchDet = data.message[0];
+            resolve(this.matchDet);
+          } else{
+            reject('Error While Retrieving Data');
+          }
+      })
+      .catch((err) => {
+          reject(err);
+      });
+    });
   }
 
   viewTeamOneStats(event) {
