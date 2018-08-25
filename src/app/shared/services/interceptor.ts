@@ -4,7 +4,8 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpResponse
+  HttpResponse,
+  HttpErrorResponse
 } from '@angular/common/http';
 import  { Observable }   from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -25,6 +26,8 @@ export class CustomHttpinterceptor implements HttpInterceptor {
     return next.handle(request).pipe(tap((ev: HttpEvent<any>) => {
         if(ev instanceof HttpResponse) {
           console.log('processing response', ev);
+          dialogRef.close();
+        } else if(ev instanceof HttpErrorResponse){
           dialogRef.close();
         }
       }));
