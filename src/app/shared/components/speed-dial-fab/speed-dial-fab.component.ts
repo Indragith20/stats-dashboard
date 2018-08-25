@@ -28,8 +28,8 @@ export class SpeedDialFabComponent {
     },
     {
       icon: 'lock',
-      toolTip: 'Lock',
-      component: 'TimeLineComponent'
+      toolTip: 'LogOut',
+      component: 'LogOut'
     }
   ];
   buttons = [];

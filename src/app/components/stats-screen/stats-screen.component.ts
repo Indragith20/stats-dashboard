@@ -123,6 +123,9 @@ export class StatsScreenComponent implements OnInit {
           console.log('dialog closed');
         });
       }
+      case 'LogOut': {
+        break;
+      }
       default:
         break;
     }
