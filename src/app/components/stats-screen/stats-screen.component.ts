@@ -4,6 +4,7 @@ import { AppService } from '../../shared/services/app.service';
 import { MatSnackBar, MatDialog, MatDialogRef } from '@angular/material';
 import { SnackbarComponent } from '../../shared/components/snackbar/snackbar.component';
 import { TimeLineComponent } from '../time-line/time-line.component';
+import { DetailedStatsComponent } from '../detailed-stats/detailed-stats.component';
 
 @Component({
   selector: 'app-stats-screen',
@@ -23,6 +24,7 @@ export class StatsScreenComponent implements OnInit {
   scoreCardContent: any;
   foulsContent: any;
   currentMatchId: string;
+  matchDet: any;
 
   constructor(private appService: AppService, private snackBar: MatSnackBar, private dialog: MatDialog) {
     this.cardQuestions = cards;
@@ -93,9 +95,12 @@ export class StatsScreenComponent implements OnInit {
   loadComponent(componentName) {
     let dialogRef: MatDialogRef<any>
     switch(componentName) {
-      case 'TimeLineComponent':
-        this.getTimeLine().then((data) => {
-          dialogRef = this.dialog.open(TimeLineComponent, {data: {timeline: data, }});
+      case 'TimeLineComponent': {
+        this.getTimeLine().then((matchDet) => {
+          const fulltimelineData = matchDet.match_stats_timeline;
+          const refereeUniqueId = this.appService.referreeDetails ? this.appService.referreeDetails.uniqueId : '';
+          const currentTimeLine = fulltimelineData[refereeUniqueId];
+          dialogRef = this.dialog.open(TimeLineComponent, {data: {timeline: currentTimeLine }});
           dialogRef.afterClosed().subscribe(() => {
             console.log('dialog closed');
           });
@@ -108,6 +113,14 @@ export class StatsScreenComponent implements OnInit {
           }); 
         });
         break;
+      }
+      case 'DetailedStatsComponent': {
+        const playersList = this.matchDetails.players;
+        dialogRef = this.dialog.open(DetailedStatsComponent, { data: { playersList: playersList } });
+        dialogRef.afterClosed().subscribe(() => {
+          console.log('dialog closed');
+        });
+      }
       default:
         break;
     }
@@ -118,11 +131,8 @@ export class StatsScreenComponent implements OnInit {
     return new Promise((resolve, reject) => {
       this.appService.getMatchDetailsByID(this.currentMatchId).then((data: any) => {
           if(data.message.length > 0) {
-            const matchDet = data.message[0];
-            const fulltimelineData = matchDet.match_stats_timeline;
-            const refereeUniqueId = this.appService.referreeDetails ? this.appService.referreeDetails.uniqueId : '';
-            const currentTimeLine = fulltimelineData[refereeUniqueId];
-            resolve(currentTimeLine);
+            this.matchDet = data.message[0];
+            resolve(this.matchDet);
           } else{
             reject('Error While Retrieving Data');
           }

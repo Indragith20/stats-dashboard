@@ -19,7 +19,7 @@ export class SpeedDialFabComponent {
     {
       icon: 'view_headline',
       toolTip: 'View Stats',
-      component: 'TimeLineComponent'
+      component: 'DetailedStatsComponent'
     },
     {
       icon: 'room',

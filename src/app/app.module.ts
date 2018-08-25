@@ -24,6 +24,8 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ScoreCardComponent } from './components/score-card/score-card.component';
 import { SpeedDialFabComponent } from './shared/components/speed-dial-fab/speed-dial-fab.component';
 import { TimeLineComponent } from './components/time-line/time-line.component';
+import { DetailedStatsComponent } from './components/detailed-stats/detailed-stats.component';
+import { TeamStatsComponent } from './components/detailed-stats/components/team-stats/team-stats.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { TimeLineComponent } from './components/time-line/time-line.component';
     LoaderComponent,
     ScoreCardComponent,
     SpeedDialFabComponent,
-    TimeLineComponent
+    TimeLineComponent,
+    DetailedStatsComponent,
+    TeamStatsComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +56,7 @@ import { TimeLineComponent } from './components/time-line/time-line.component';
     MyOwnCustomMaterialModule
   ],
   providers: [AppService, AuthGuardService, { provide: HTTP_INTERCEPTORS, useClass: CustomHttpinterceptor, multi: true }],
-  entryComponents: [DialogComponent, SnackbarComponent, LoaderComponent, TimeLineComponent],
+  entryComponents: [DialogComponent, SnackbarComponent, LoaderComponent, TimeLineComponent, DetailedStatsComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
