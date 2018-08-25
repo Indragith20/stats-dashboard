@@ -97,6 +97,26 @@ export class AppService {
         });
     }
 
+    undoStats() {
+        let body = new FormData();
+        body.append('referee_id', this.referreeDetails.profileId);
+        body.append('referee_khel_id', this.referreeDetails.uniqueId);
+        body.append('match_id', this.matchIdentifier);
+        
+        const url = `${EndpointsEnum.GLOBAL_CORE_URL}/ManageExternalMatches/stats_keeper_undo`;
+        return new Promise((resolve, reject) => {
+            this.sendRequest(url, body).subscribe((data: any) => {
+                if(data.status === 'success') {
+                    resolve(data);
+                } else {
+                    reject(data.status);
+                }
+            }, (err) => {
+                reject(err);
+            });
+        });
+    }
+
     sendRequest(url: string, body: any) {
         return this.http.post(url, body, {headers: this.headers});
     }

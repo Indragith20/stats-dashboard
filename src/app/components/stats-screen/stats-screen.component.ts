@@ -101,16 +101,14 @@ export class StatsScreenComponent implements OnInit {
           const refereeUniqueId = this.appService.referreeDetails ? this.appService.referreeDetails.uniqueId : '';
           const currentTimeLine = fulltimelineData[refereeUniqueId];
           dialogRef = this.dialog.open(TimeLineComponent, {data: {timeline: currentTimeLine }});
-          dialogRef.afterClosed().subscribe(() => {
+          dialogRef.afterClosed().subscribe((result) => {
             console.log('dialog closed');
+            if(result) {
+              this.openSnackBar('Error While Retrieving Data');
+            }
           });
         }).catch((err) => {
-          this.snackBar.openFromComponent(SnackbarComponent, {
-            data: err,
-            duration: 5000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top'
-          }); 
+          this.openSnackBar(err);
         });
         break;
       }
@@ -149,6 +147,24 @@ export class StatsScreenComponent implements OnInit {
 
   viewTeamTwoStats(event) {
     event.preventDefault();
+  }
+
+  openSnackBar(data) {
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      data: data,
+      duration: 5000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top'
+    }); 
+  }
+
+  undoStats() {
+    this.appService.undoStats().then((data: any) => {
+      this.openSnackBar(data.message);
+    })
+    .catch((err) => {
+      this.openSnackBar(err);
+    })
   }
 
 }

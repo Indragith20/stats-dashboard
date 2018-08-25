@@ -15,6 +15,7 @@ export class DetailedStatsComponent implements OnInit {
   teamOneStatsData: any [] = [];
   teamTwoStatsData: any[] = [];
 
+
   constructor(public dialogRef: MatDialogRef<DetailedStatsComponent>, @Inject(MAT_DIALOG_DATA) public playersList: any, private appService: AppService) { 
     console.log(playersList.playersList);
     const players = playersList.playersList
@@ -53,6 +54,8 @@ export class DetailedStatsComponent implements OnInit {
         });
       }
       
+    }).catch((err) => {
+      this.dialogRef.close({dialogResult: 'Error'})
     });
   }
 
