@@ -10,10 +10,17 @@ export class AppService {
     matchDetailsRetrieved: boolean = false;
     headers: HttpHeaders;
     matchIdentifier: any;
+    teamOneJersey: any;
+    teamTwoJersey: any;
     
     constructor(private http: HttpClient) {
         this.headers = new HttpHeaders();
         this.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+    }
+
+    setJerseyColors(color1, color2) {
+        this.teamOneJersey = color1;
+        this.teamTwoJersey = color2;
     }
 
     getMatchDetailsByID(matchId: any) {

@@ -26,6 +26,7 @@ import { SpeedDialFabComponent } from './shared/components/speed-dial-fab/speed-
 import { TimeLineComponent } from './components/time-line/time-line.component';
 import { DetailedStatsComponent } from './components/detailed-stats/detailed-stats.component';
 import { TeamStatsComponent } from './components/detailed-stats/components/team-stats/team-stats.component';
+import { JerseyPickerComponent } from './components/jersey-picker/jersey-picker.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { TeamStatsComponent } from './components/detailed-stats/components/team-
     SpeedDialFabComponent,
     TimeLineComponent,
     DetailedStatsComponent,
-    TeamStatsComponent
+    TeamStatsComponent,
+    JerseyPickerComponent
   ],
   imports: [
     BrowserModule,

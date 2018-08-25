@@ -44,8 +44,8 @@
   <div class="col-md-6">
     <mat-accordion>
       <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title style="text-transform: capitalize; text-align: center">
+        <mat-expansion-panel-header [ngStyle]="{'background-color': getColor(1)}">
+          <mat-panel-title style="text-transform: capitalize; text-align: center; color: white; font-size: 16px">
             <b>{{teamOne ? teamOne.team_name : 'Team One'}}</b>
           </mat-panel-title>
         </mat-expansion-panel-header>
@@ -58,8 +58,8 @@
   <div class="col-md-6">
     <mat-accordion>
       <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title style="text-transform: capitalize">
+        <mat-expansion-panel-header [ngStyle]="{'background-color': getColor(2)}">
+          <mat-panel-title style="text-transform: capitalize; color: white; font-size: 16px">
             <b>{{teamTwo ? teamTwo.team_name : 'Team Two'}}</b>
           </mat-panel-title>
         </mat-expansion-panel-header>

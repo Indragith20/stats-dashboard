@@ -1,0 +1,45 @@
+<div class="container" id="mydiv">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6">
+        <mat-card>
+          <mat-card-title>
+            <mat-toolbar>Choose Team Jersey</mat-toolbar>
+          </mat-card-title>
+          <mat-card-content>
+            <div class="example-container">
+                <mat-form-field>
+                    <mat-select placeholder="{{teamOneName}}" [(ngModel)]="teamOneJerseyColor">
+                      <mat-option *ngFor="let color of colorList" [value]="color.value">
+                        <span class="round" [ngStyle]="{'background-color': getColor(color.value)}"></span>
+                        {{color.color}}
+                      </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-select placeholder="{{teamTwoName}}" [(ngModel)]="teamTwoJerseyColor">
+                        <mat-option *ngFor="let color of colorList" [value]="color.value">
+                            <span class="round" [ngStyle]="{'background-color': getColor(color.value)}"></span>
+                            {{color.color}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+          </mat-card-content>
+          <mat-card-footer>
+            <mat-card-actions>
+              <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4" style="display: flex;align-items: center;justify-content: center">
+                    <button mat-raised-button (click)="proceed()">
+                      Done
+                    </button>
+                </div>
+              </div>
+            </mat-card-actions>
+          </mat-card-footer>
+        </mat-card>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+  </div>

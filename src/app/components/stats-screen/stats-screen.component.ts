@@ -25,6 +25,8 @@ export class StatsScreenComponent implements OnInit {
   foulsContent: any;
   currentMatchId: string;
   matchDet: any;
+  teamOneJerseyColor: any;
+  teamTwoJerseyColor: any;
 
   constructor(private appService: AppService, private snackBar: MatSnackBar, private dialog: MatDialog) {
     this.cardQuestions = cards;
@@ -44,6 +46,8 @@ export class StatsScreenComponent implements OnInit {
       };
       this.getScoreCardDetails();
       this.currentMatchId = this.appService.matchIdentifier;
+      this.teamOneJerseyColor = this.appService.teamOneJersey;
+      this.teamTwoJerseyColor = this.appService.teamTwoJersey;
     }
   }
 
@@ -165,6 +169,10 @@ export class StatsScreenComponent implements OnInit {
     .catch((err) => {
       this.openSnackBar(err);
     })
+  }
+
+  getColor(index) {
+    return index === 1 ? this.teamOneJerseyColor ? this.teamOneJerseyColor : '#000000' : this.teamTwoJerseyColor ? this.teamTwoJerseyColor : '#000000';
   }
 
 }
