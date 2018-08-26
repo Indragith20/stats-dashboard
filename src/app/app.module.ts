@@ -27,6 +27,7 @@ import { TimeLineComponent } from './components/time-line/time-line.component';
 import { DetailedStatsComponent } from './components/detailed-stats/detailed-stats.component';
 import { TeamStatsComponent } from './components/detailed-stats/components/team-stats/team-stats.component';
 import { JerseyPickerComponent } from './components/jersey-picker/jersey-picker.component';
+import { PlayerService } from './shared/services/get-player-details.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,7 @@ import { JerseyPickerComponent } from './components/jersey-picker/jersey-picker.
     BrowserAnimationsModule,
     MyOwnCustomMaterialModule
   ],
-  providers: [AppService, AuthGuardService, { provide: HTTP_INTERCEPTORS, useClass: CustomHttpinterceptor, multi: true }],
+  providers: [AppService, AuthGuardService, PlayerService, { provide: HTTP_INTERCEPTORS, useClass: CustomHttpinterceptor, multi: true }],
   entryComponents: [DialogComponent, SnackbarComponent, LoaderComponent, TimeLineComponent, DetailedStatsComponent],
   bootstrap: [AppComponent]
 })

@@ -5,6 +5,8 @@ import { MatSnackBar, MatDialog, MatDialogRef } from '@angular/material';
 import { SnackbarComponent } from '../../shared/components/snackbar/snackbar.component';
 import { TimeLineComponent } from '../time-line/time-line.component';
 import { DetailedStatsComponent } from '../detailed-stats/detailed-stats.component';
+import { Router } from '@angular/router';
+import { PlayerService } from '../../shared/services/get-player-details.service';
 
 @Component({
   selector: 'app-stats-screen',
@@ -28,7 +30,8 @@ export class StatsScreenComponent implements OnInit {
   teamOneJerseyColor: any;
   teamTwoJerseyColor: any;
 
-  constructor(private appService: AppService, private snackBar: MatSnackBar, private dialog: MatDialog) {
+  constructor(private appService: AppService, private snackBar: MatSnackBar, private dialog: MatDialog, 
+      private router: Router, private playerService: PlayerService) {
     this.cardQuestions = cards;
   }
 
@@ -48,6 +51,13 @@ export class StatsScreenComponent implements OnInit {
       this.currentMatchId = this.appService.matchIdentifier;
       this.teamOneJerseyColor = this.appService.teamOneJersey;
       this.teamTwoJerseyColor = this.appService.teamTwoJersey;
+      this.setPlayersList();
+    }
+  }
+
+  setPlayersList() {
+    if(this.matchDetails) {
+      this.playerService.setPlayersList(this.matchDetails.players.team1, this.matchDetails.players.team2);
     }
   }
 
@@ -104,7 +114,8 @@ export class StatsScreenComponent implements OnInit {
           const fulltimelineData = matchDet.match_stats_timeline;
           const refereeUniqueId = this.appService.referreeDetails ? this.appService.referreeDetails.uniqueId : '';
           const currentTimeLine = fulltimelineData[refereeUniqueId];
-          dialogRef = this.dialog.open(TimeLineComponent, {data: {timeline: currentTimeLine }});
+          dialogRef = this.dialog.open(TimeLineComponent, {data: {timeline: currentTimeLine }, height: '400px',
+          width: '600px' });
           dialogRef.afterClosed().subscribe((result) => {
             console.log('dialog closed');
             if(result) {
@@ -118,12 +129,15 @@ export class StatsScreenComponent implements OnInit {
       }
       case 'DetailedStatsComponent': {
         const playersList = this.matchDetails.players;
-        dialogRef = this.dialog.open(DetailedStatsComponent, { data: { playersList: playersList } });
+        dialogRef = this.dialog.open(DetailedStatsComponent, { data: { playersList: playersList }, height: '400px',
+        width: '600px' });
         dialogRef.afterClosed().subscribe(() => {
           console.log('dialog closed');
         });
+        break;
       }
       case 'LogOut': {
+        this.router.navigate(['/login']);
         break;
       }
       default:
