@@ -9,13 +9,13 @@ This setup requires the installation of **Node & Angular CLI** in your system.
   $ git clone https://github.com/Indragith20/stats-dashboard.git
   ```
 
-- Traverse to `live_score_app` folder project using the following command:
+- Traverse to `stats-dashboard` folder project using the following command:
   cd stats-dashboard/
 
 - Install Angular CLI 
     Command : npm install -g @angular/cli
 
-- Install Packages
+- Install Dependencies
     Command: npm install
 
 
