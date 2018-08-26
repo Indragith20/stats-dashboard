@@ -1,10 +1,26 @@
-<mat-list>
-    <mat-list-item>
-      <mat-icon matListIcon>folder</mat-icon>
-      <h3 matLine>Hello </h3>
-      <p matLine>
-        <span>Subject </span>
-        <span class="demo-2">Content</span>
-      </p>
-    </mat-list-item>
-</mat-list>  
+<ng-container>
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h3>Timeline</h3>
+    </div>
+  </div>
+  <hr />
+  <mat-card *ngFor="let timelineData of formattedTimeLineData" style="margin: 10px;">
+
+    <mat-card-title>
+      {{timelineData.time}}
+    </mat-card-title>
+    <mat-card-content>
+      <div class="row">
+        <div class="col-md-8">
+          <span class="item-style"><b>Event: </b>{{timelineData.event}} </span>
+          <span class="item-style"><b>Team: </b>{{timelineData.teamName}} </span>
+          <span class="item-style"><b>Player: </b>{{timelineData.playerName}}</span>
+        </div>
+        <div class="col-md-4">
+          <img src="{{timelineData.eventIcon}}" height="50" width="50" />
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { PlayerService } from '../../shared/services/get-player-details.service';
 
 @Component({
   selector: 'app-time-line',
@@ -7,8 +8,9 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
   styleUrls: ['./time-line.component.scss']
 })
 export class TimeLineComponent implements OnInit {
-
-  constructor(public dialogRef: MatDialogRef<TimeLineComponent>, @Inject(MAT_DIALOG_DATA) public data: any) { 
+  formattedTimeLineData: any;
+  constructor(public dialogRef: MatDialogRef<TimeLineComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
+          private playerService: PlayerService) { 
     console.log(data);
     this.formatTimeLine(data);
   }
@@ -17,12 +19,16 @@ export class TimeLineComponent implements OnInit {
   }
 
   formatTimeLine(data) {
-    if(data) {
-      const formattedTimeLineData = data.map((timeline) => {
-                                      if(timeline instanceof Object) {
-                                        
-                                      }
-                                    });
+    if (data) {
+      this.formattedTimeLineData = data.timeline.filter(timeline => timeline instanceof Object)
+        .map(filteredTimeline => ({
+          time: filteredTimeline.date_created,
+          event: filteredTimeline.type,
+          teamName: this.playerService.getTeamName(filteredTimeline.team_id),
+          playerName: this.playerService.getPlayerName(filteredTimeline.team_id, filteredTimeline.by),
+          eventIcon: this.playerService.getIcon(filteredTimeline.type)
+        })).reverse();
+      console.log(this.formattedTimeLineData);
     }
   }
 
