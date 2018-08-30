@@ -19,7 +19,7 @@ export class OtpLoginComponent implements OnInit {
     this.loginService.getProfileDetails().then((data) => {
       console.log(data);
     });
-    this.loginService.getMatchDetailsByID(this.enteredOtp ? this.enteredOtp : 'MAT23924')
+    this.loginService.getIntialStatsData(this.enteredOtp ? this.enteredOtp : 'MAT23924')
         .then((data: any) => {
           console.log(data);
           if(data.status === 'error') {
