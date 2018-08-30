@@ -70,8 +70,10 @@ export class DialogComponent {
     } else {
       this.player = {...this.player, oppositionPlayer: playerDet.selectedPlayer}
     }
-    console.log(this.player);
   }
 
+  getColor(modalTitleColor) {
+    return modalTitleColor ? '#fff': '#000';
+  }
 }
   

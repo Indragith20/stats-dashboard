@@ -25,7 +25,6 @@ export class CustomHttpinterceptor implements HttpInterceptor {
     const dialogRef = this.dialog.open(LoaderComponent, dialogConfig);
     return next.handle(request).pipe(tap((ev: HttpEvent<any>) => {
         if(ev instanceof HttpResponse) {
-          console.log('processing response', ev);
           dialogRef.close();
         } else if(ev instanceof HttpErrorResponse){
           dialogRef.close();

@@ -13,15 +13,46 @@ export class OtpLoginComponent implements OnInit {
   enteredOtp: string;
   constructor(private loginService: AppService, private snackBar: MatSnackBar, private router: Router) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   getMatchData() {
     this.loginService.getProfileDetails().then((data) => {
-      console.log(data);
+      this.snackBar.openFromComponent(SnackbarComponent, {
+        data: 'Enter OTP',
+        duration: 500,
+        horizontalPosition: 'right',
+        verticalPosition: 'top'
+      });
     });
-    this.loginService.getIntialStatsData(this.enteredOtp ? this.enteredOtp : 'MAT23924')
+    if(this.enteredOtp) {
+      this.loginService.getIntialStatsData(this.enteredOtp)
         .then((data: any) => {
-          console.log(data);
+          if(data.status === 'success') {
+            this.getMatchStatsData();
+          } else{
+            this.snackBar.openFromComponent(SnackbarComponent, {
+              data: 'No Matches Found!',
+              duration: 5000,
+              horizontalPosition: 'right',
+              verticalPosition: 'top'
+            });  
+          }
+        })
+        .catch((err) => {
+          this.snackBar.openFromComponent(SnackbarComponent, {
+            data: 'No Matches Found!',
+            duration: 5000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          });
+        });
+    }
+  }
+
+  getMatchStatsData() {
+    this.loginService.getMatchDetailsByID(this.enteredOtp)
+        .then((data: any) => {
           if(data.status === 'error') {
             this.snackBar.openFromComponent(SnackbarComponent, {
               data: 'No Matches Found!',
@@ -34,8 +65,13 @@ export class OtpLoginComponent implements OnInit {
           }
         })
         .catch((err) => {
-          console.log(err);
-        });
+          this.snackBar.openFromComponent(SnackbarComponent, {
+            data: 'Something Wrong Happened..',
+            duration: 5000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top'
+          });
+    });
   }
 
 }

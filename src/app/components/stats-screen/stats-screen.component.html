@@ -45,8 +45,8 @@
   <div class="col-md-6">
     <mat-accordion>
       <mat-expansion-panel>
-        <mat-expansion-panel-header [ngStyle]="{'background-color': getColor(1)}">
-          <mat-panel-title style="text-transform: capitalize; text-align: center; color: white; font-size: 16px">
+        <mat-expansion-panel-header [ngStyle]="{'background-color': getBackgroundColor(1)}">
+          <mat-panel-title style="text-transform: capitalize; text-align: center; font-size: 16px" [ngStyle]="{'color': getColor(1)}">
             <b>{{teamOne ? teamOne.team_name : 'Team One'}}</b>
           </mat-panel-title>
         </mat-expansion-panel-header>
@@ -59,8 +59,8 @@
   <div class="col-md-6">
     <mat-accordion>
       <mat-expansion-panel>
-        <mat-expansion-panel-header [ngStyle]="{'background-color': getColor(2)}">
-          <mat-panel-title style="text-transform: capitalize; color: white; font-size: 16px">
+        <mat-expansion-panel-header [ngStyle]="{'background-color': getBackgroundColor(2)}">
+          <mat-panel-title style="text-transform: capitalize; font-size: 16px" [ngStyle]="{'color': getColor(2)}">
             <b>{{teamTwo ? teamTwo.team_name : 'Team Two'}}</b>
           </mat-panel-title>
         </mat-expansion-panel-header>

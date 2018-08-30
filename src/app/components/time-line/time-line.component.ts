@@ -11,7 +11,6 @@ export class TimeLineComponent implements OnInit {
   formattedTimeLineData: any;
   constructor(public dialogRef: MatDialogRef<TimeLineComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
           private playerService: PlayerService) { 
-    console.log(data);
     this.formatTimeLine(data);
   }
 
@@ -28,7 +27,6 @@ export class TimeLineComponent implements OnInit {
           playerName: this.playerService.getPlayerName(filteredTimeline.team_id, filteredTimeline.by),
           eventIcon: this.playerService.getIcon(filteredTimeline.type)
         })).reverse();
-      console.log(this.formattedTimeLineData);
     }
   }
 

@@ -87,9 +87,7 @@ export class StatsScreenComponent implements OnInit {
   }
 
   updateStatsData(statsData) {
-    console.log(statsData);
     this.appService.updateMatchStatData(statsData).then((data: any) => {
-      console.log(data);
       this.snackBar.openFromComponent(SnackbarComponent, {
         data: data.message,
         duration: 5000,
@@ -117,7 +115,6 @@ export class StatsScreenComponent implements OnInit {
           dialogRef = this.dialog.open(TimeLineComponent, {data: {timeline: currentTimeLine }, height: '400px',
           width: '600px' });
           dialogRef.afterClosed().subscribe((result) => {
-            console.log('dialog closed');
             if(result) {
               this.openSnackBar('Error While Retrieving Data');
             }
@@ -131,9 +128,6 @@ export class StatsScreenComponent implements OnInit {
         const playersList = this.matchDetails.players;
         dialogRef = this.dialog.open(DetailedStatsComponent, { data: { playersList: playersList }, height: '400px',
         width: '600px' });
-        dialogRef.afterClosed().subscribe(() => {
-          console.log('dialog closed');
-        });
         break;
       }
       case 'LogOut': {
@@ -188,8 +182,13 @@ export class StatsScreenComponent implements OnInit {
     })
   }
 
+  getBackgroundColor(index) {
+    return index === 1 ? this.teamOneJerseyColor ? this.teamOneJerseyColor : '#ffffff' : this.teamTwoJerseyColor ? this.teamTwoJerseyColor : '#ffffff';
+  }
+
   getColor(index) {
-    return index === 1 ? this.teamOneJerseyColor ? this.teamOneJerseyColor : '#000000' : this.teamTwoJerseyColor ? this.teamTwoJerseyColor : '#000000';
+    return index === 1 ? this.teamOneJerseyColor ? '#fff' : '#000000' : 
+                          this.teamTwoJerseyColor ?  '#fff' : '#00000' ;
   }
 
 }
