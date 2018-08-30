@@ -43,6 +43,25 @@ export class AppService {
         });
     }
 
+    getIntialStatsData(matchId: any) {
+        let body = new FormData();
+        body.append('referee_id', 'PID01511');
+        body.append('otp', matchId);
+        const url = `${EndpointsEnum.GLOBAL_CORE_URL}ManageMatches/get_stats_keeping_match`;
+        return new Promise((resolve, reject)=> {
+            this.sendRequest(url, body).subscribe((data: any) => {
+                if (data) {
+                    this.matchDetails = data.status !== 'error' ? data : '';
+                    this.matchDetailsRetrieved = true;
+                    this.matchIdentifier = data.message[0].match_id;
+                    resolve(data);
+                }
+            }, (err) => {
+                reject(err);
+            });
+        });
+    }
+
     updateMatchStatData(timelineData: any) {
         let body = new FormData();
         body.append('referee_id', this.referreeDetails.profileId);
