@@ -64,7 +64,6 @@ export class TeamTwoComponent implements OnInit {
 
       (this.cardForms.get('cards') as FormArray).push(newFormGroup);
     });
-    console.log(this.cardForms);
   }
 
   openDialog(card): void {
@@ -81,7 +80,6 @@ export class TeamTwoComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       if (result) {
         this.createStatsData(dialogRef.componentInstance);
       }
@@ -216,7 +214,7 @@ export class TeamTwoComponent implements OnInit {
               "by": player1.khelId,
               "rebound_by": oppositionPlayer.khelId,
               "rebound_type": "defensive_rebound",
-              'team_id': this.teamDetails.managers.team1[0].team_id
+              'team_id': this.teamDetails.managers.team2[0].team_id
             };
             this.updateStatsData.emit(time_stamp);
             this.createDefensiveReboundRecord(oppositionPlayer.khelId, timeString, this.teamDetails.managers.team1[0].team_id);
@@ -253,7 +251,7 @@ export class TeamTwoComponent implements OnInit {
               "by": player1.khelId,
               "rebound_by": oppositionPlayer.khelId,
               "rebound_type": "defensive_rebound",
-              'team_id': this.teamDetails.managers.team1[0].team_id
+              'team_id': this.teamDetails.managers.team2[0].team_id
             };
             this.updateStatsData.emit(time_stamp);
             this.createDefensiveReboundRecord(oppositionPlayer.khelId, timeString, this.teamDetails.managers.team1[0].team_id);
@@ -290,7 +288,7 @@ export class TeamTwoComponent implements OnInit {
               "by": player1.khelId,
               "rebound_by": oppositionPlayer.khelId,
               "rebound_type": "defensive_rebound",
-              'team_id': this.teamDetails.managers.team1[0].team_id
+              'team_id': this.teamDetails.managers.team2[0].team_id
             };
             this.updateStatsData.emit(time_stamp);
             this.createDefensiveReboundRecord(oppositionPlayer.khelId, timeString, this.teamDetails.managers.team1[0].team_id);

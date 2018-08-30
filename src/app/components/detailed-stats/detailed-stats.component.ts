@@ -17,7 +17,6 @@ export class DetailedStatsComponent implements OnInit {
 
 
   constructor(public dialogRef: MatDialogRef<DetailedStatsComponent>, @Inject(MAT_DIALOG_DATA) public playersList: any, private appService: AppService) { 
-    console.log(playersList.playersList);
     const players = playersList.playersList
     if(players) {
       this.teamOneId = players.team1[0].team_id;
@@ -33,7 +32,6 @@ export class DetailedStatsComponent implements OnInit {
 
   getTeamStats(teamId) {
     this.appService.getMatchStatsData(teamId).then((data: any) => {
-      console.log(data);
       if(teamId === this.teamOneId) {
         this.teamOneStatsData = [];
         Object.keys(data.message).map((keyName) => {

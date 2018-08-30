@@ -47,13 +47,10 @@ export class AppService {
         let body = new FormData();
         body.append('referee_id', 'PID01511');
         body.append('otp', matchId);
-        const url = `${EndpointsEnum.GLOBAL_CORE_URL}ManageMatches/get_stats_keeping_match`;
+        const url = `${EndpointsEnum.GLOBAL_CORE_URL}ManageExternalMatches/get_stats_keeping_match`;
         return new Promise((resolve, reject)=> {
             this.sendRequest(url, body).subscribe((data: any) => {
                 if (data) {
-                    this.matchDetails = data.status !== 'error' ? data : '';
-                    this.matchDetailsRetrieved = true;
-                    this.matchIdentifier = data.message[0].match_id;
                     resolve(data);
                 }
             }, (err) => {
@@ -69,7 +66,6 @@ export class AppService {
         body.append('match_id', this.matchIdentifier);
         Object.keys(timelineData).map((key) => {
             const keyTobeSet = 'timeline['+key+']';
-            console.log(keyTobeSet);
             body.append(keyTobeSet, timelineData[key]);
         });
         const url = `${EndpointsEnum.GLOBAL_CORE_URL}ManageExternalMatches/stats_keeper_update`
