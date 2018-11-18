@@ -16,8 +16,9 @@ export class DetailedStatsComponent implements OnInit {
   teamTwoStatsData: any[] = [];
 
 
-  constructor(public dialogRef: MatDialogRef<DetailedStatsComponent>, @Inject(MAT_DIALOG_DATA) public playersList: any, private appService: AppService) { 
-    const players = playersList.playersList
+  constructor(public dialogRef: MatDialogRef<DetailedStatsComponent>,
+    @Inject(MAT_DIALOG_DATA) public playersList: any, private appService: AppService) {
+    const players = playersList.playersList;
     if(players) {
       this.teamOneId = players.team1[0].team_id;
       this.teamTwoId = players.team2[0].team_id;
@@ -51,16 +52,17 @@ export class DetailedStatsComponent implements OnInit {
           });
         });
       }
-      
     }).catch((err) => {
-      this.dialogRef.close({dialogResult: 'Error'})
+      this.dialogRef.close({dialogResult: 'Error'});
     });
   }
 
   changeEvent(event) {
     if(event.index === 0) {
+      // tslint:disable-next-line:no-unused-expression
       this.teamOneStatsData.length === 0 ? this.getTeamStats(this.teamOneId) : undefined;
     } else {
+      // tslint:disable-next-line:no-unused-expression
       this.teamTwoStatsData.length === 0 ? this.getTeamStats(this.teamTwoId) : undefined;
     }
   }

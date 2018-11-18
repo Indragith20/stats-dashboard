@@ -12,7 +12,7 @@ export class AppService {
     matchIdentifier: any;
     teamOneJersey: any;
     teamTwoJersey: any;
-    
+
     constructor(private http: HttpClient) {
         this.headers = new HttpHeaders();
         this.headers.set('Content-Type', 'application/x-www-form-urlencoded');
@@ -24,12 +24,12 @@ export class AppService {
     }
 
     getMatchDetailsByID(matchId: any) {
-        let body = new FormData();
+        const body = new FormData();
         body.append('referee_id', 'PID01511');
         body.append('category', 'STATS');
         body.append('match_id', matchId);
         const url = `${EndpointsEnum.GLOBAL_CORE_URL}ManageMatches/getStatsMatchdata`;
-        return new Promise((resolve, reject)=> {
+        return new Promise((resolve, reject) => {
             this.sendRequest(url, body).subscribe((data: any) => {
                 if (data) {
                     this.matchDetails = data.status !== 'error' ? data : '';
@@ -44,11 +44,11 @@ export class AppService {
     }
 
     getIntialStatsData(matchId: any) {
-        let body = new FormData();
+        const body = new FormData();
         body.append('referee_id', 'PID01511');
         body.append('otp', matchId);
         const url = `${EndpointsEnum.GLOBAL_CORE_URL}ManageExternalMatches/get_stats_keeping_match`;
-        return new Promise((resolve, reject)=> {
+        return new Promise((resolve, reject) => {
             this.sendRequest(url, body).subscribe((data: any) => {
                 if (data) {
                     resolve(data);
@@ -60,15 +60,15 @@ export class AppService {
     }
 
     updateMatchStatData(timelineData: any) {
-        let body = new FormData();
+        const body = new FormData();
         body.append('referee_id', this.referreeDetails.profileId);
         body.append('referee_khel_id', this.referreeDetails.uniqueId);
         body.append('match_id', this.matchIdentifier);
         Object.keys(timelineData).map((key) => {
-            const keyTobeSet = 'timeline['+key+']';
+            const keyTobeSet = 'timeline[' + key + ']';
             body.append(keyTobeSet, timelineData[key]);
         });
-        const url = `${EndpointsEnum.GLOBAL_CORE_URL}ManageExternalMatches/stats_keeper_update`
+        const url = `${EndpointsEnum.GLOBAL_CORE_URL}ManageExternalMatches/stats_keeper_update`;
         return new Promise((resolve, reject) => {
             this.sendRequest(url, body).subscribe((data: any) => {
                 if(data.status === 'success') {
@@ -83,10 +83,9 @@ export class AppService {
     }
 
     getProfileDetails() {
-        let body = new FormData();
+        const body = new FormData();
         body.append('username', 'ref2@khelid.com');
         body.append('password', '123456');
-        
         const url = `${EndpointsEnum.GLOBAL_CORE_URL}/ManageAuthentication/referee_login`;
         return new Promise((resolve, reject) => {
             this.sendRequest(url, body).subscribe((data: any) => {
@@ -101,12 +100,12 @@ export class AppService {
     }
 
     getMatchStatsData(teamId) {
-        let body = new FormData();
+        const body = new FormData();
         body.append('referee_id', this.referreeDetails.profileId);
         body.append('referee_khel_id', this.referreeDetails.uniqueId);
         body.append('match_id', this.matchIdentifier);
         body.append('team_id', String(teamId));
-        
+
         const url = `${EndpointsEnum.GLOBAL_CORE_URL}/ManageExternalMatches/stats_keeper_stats`;
         return new Promise((resolve, reject) => {
             this.sendRequest(url, body).subscribe((data: any) => {
@@ -120,11 +119,11 @@ export class AppService {
     }
 
     undoStats() {
-        let body = new FormData();
+        const body = new FormData();
         body.append('referee_id', this.referreeDetails.profileId);
         body.append('referee_khel_id', this.referreeDetails.uniqueId);
         body.append('match_id', this.matchIdentifier);
-        
+
         const url = `${EndpointsEnum.GLOBAL_CORE_URL}/ManageExternalMatches/stats_keeper_undo`;
         return new Promise((resolve, reject) => {
             this.sendRequest(url, body).subscribe((data: any) => {

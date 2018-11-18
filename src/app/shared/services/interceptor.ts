@@ -7,7 +7,7 @@ import {
   HttpResponse,
   HttpErrorResponse
 } from '@angular/common/http';
-import  { Observable }   from 'rxjs';
+import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { LoaderComponent } from '../components/loader/loader.component';
@@ -26,7 +26,7 @@ export class CustomHttpinterceptor implements HttpInterceptor {
     return next.handle(request).pipe(tap((ev: HttpEvent<any>) => {
         if(ev instanceof HttpResponse) {
           dialogRef.close();
-        } else if(ev instanceof HttpErrorResponse){
+        } else if(ev instanceof HttpErrorResponse) {
           dialogRef.close();
         }
       }));

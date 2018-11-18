@@ -10,7 +10,7 @@ import { PlayerService } from '../../shared/services/get-player-details.service'
 export class TimeLineComponent implements OnInit {
   formattedTimeLineData: any;
   constructor(public dialogRef: MatDialogRef<TimeLineComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
-          private playerService: PlayerService) { 
+          private playerService: PlayerService) {
     this.formatTimeLine(data);
   }
 

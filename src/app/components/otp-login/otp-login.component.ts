@@ -30,13 +30,13 @@ export class OtpLoginComponent implements OnInit {
         .then((data: any) => {
           if(data.status === 'success') {
             this.getMatchStatsData();
-          } else{
+          } else {
             this.snackBar.openFromComponent(SnackbarComponent, {
               data: 'No Matches Found!',
               duration: 5000,
               horizontalPosition: 'right',
               verticalPosition: 'top'
-            });  
+            });
           }
         })
         .catch((err) => {

@@ -30,7 +30,7 @@ export class StatsScreenComponent implements OnInit {
   teamOneJerseyColor: any;
   teamTwoJerseyColor: any;
 
-  constructor(private appService: AppService, private snackBar: MatSnackBar, private dialog: MatDialog, 
+  constructor(private appService: AppService, private snackBar: MatSnackBar, private dialog: MatDialog,
       private router: Router, private playerService: PlayerService) {
     this.cardQuestions = cards;
   }
@@ -41,10 +41,10 @@ export class StatsScreenComponent implements OnInit {
       this.teamOne = this.matchDetails.managers.team1[0];
       this.teamTwo = this.matchDetails.managers.team2[0];
       this.referreeDetails = this.appService.referreeDetails;
-      
+
       this.referredProfileData = {
         refereeId: this.referreeDetails ? this.referreeDetails.profileId : '',
-        refereeKhelId: this.referreeDetails ? this.referreeDetails.uniqueId: '',
+        refereeKhelId: this.referreeDetails ? this.referreeDetails.uniqueId : '',
         refereeUserName: this.referreeDetails ? this.referreeDetails.userName : '',
       };
       this.getScoreCardDetails();
@@ -63,10 +63,10 @@ export class StatsScreenComponent implements OnInit {
 
   getScoreCardDetails() {
     const teamOneName = this.teamOne ? this.teamOne.team_name : '';
-    this.teamOneAcronym = teamOneName.split(/\s/).reduce((response,word)=> response+=word.slice(0,1),'');
+    this.teamOneAcronym = teamOneName.split(/\s/).reduce((response, word) => response += word.slice(0, 1), '');
     const teamTwoName = this.teamTwo ? this.teamTwo.team_name : '';
-    this.teamTwoAcronym = teamTwoName.split(/\s/).reduce((response,word)=> response+=word.slice(0,1),'');
-    //TODO: Remove the below hardcoded Score values with real stats data
+    this.teamTwoAcronym = teamTwoName.split(/\s/).reduce((response, word) => response += word.slice(0, 1), '');
+    // TODO: Remove the below hardcoded Score values with real stats data
     const teamOneScore = 30;
     const teamTwoScore = 16;
     this.scoreCardContent = {
@@ -75,7 +75,7 @@ export class StatsScreenComponent implements OnInit {
       teamOneScore: teamOneScore,
       teamTwoScore: teamTwoScore
     };
-    //TODO: Remove the below hardcoded Foul values with real stats data
+    // TODO: Remove the below hardcoded Foul values with real stats data
     const teamOneFouls = 30;
     const teamTwoFouls = 16;
     this.foulsContent = {
@@ -105,7 +105,7 @@ export class StatsScreenComponent implements OnInit {
   }
 
   loadComponent(componentName) {
-    let dialogRef: MatDialogRef<any>
+    let dialogRef: MatDialogRef<any>;
     switch(componentName) {
       case 'TimeLineComponent': {
         this.getTimeLine().then((matchDet) => {
@@ -146,7 +146,7 @@ export class StatsScreenComponent implements OnInit {
           if(data.message.length > 0) {
             this.matchDet = data.message[0];
             resolve(this.matchDet);
-          } else{
+          } else {
             reject('Error While Retrieving Data');
           }
       })
@@ -170,7 +170,7 @@ export class StatsScreenComponent implements OnInit {
       duration: 5000,
       horizontalPosition: 'right',
       verticalPosition: 'top'
-    }); 
+    });
   }
 
   undoStats() {
@@ -179,15 +179,16 @@ export class StatsScreenComponent implements OnInit {
     })
     .catch((err) => {
       this.openSnackBar(err);
-    })
+    });
   }
 
   getBackgroundColor(index) {
-    return index === 1 ? this.teamOneJerseyColor ? this.teamOneJerseyColor : '#ffffff' : this.teamTwoJerseyColor ? this.teamTwoJerseyColor : '#ffffff';
+    return index === 1 ? this.teamOneJerseyColor ?
+      this.teamOneJerseyColor : '#ffffff' : this.teamTwoJerseyColor ? this.teamTwoJerseyColor : '#ffffff';
   }
 
   getColor(index) {
-    return index === 1 ? this.teamOneJerseyColor ? '#fff' : '#000000' : 
+    return index === 1 ? this.teamOneJerseyColor ? '#fff' : '#000000' :
                           this.teamTwoJerseyColor ?  '#fff' : '#00000' ;
   }
 

@@ -12,13 +12,13 @@ import { DialogComponent } from '../../shared/components/dialog/dialog.component
 export class TeamOneComponent implements OnInit {
   @Input()
   set cardDetails(value: any) {
-    if(value){
+    if(value) {
       this.cards = value;
       this.intializeFormValues();
     }
   }
   @Input() teamDetails: any;
-  @Input() referreeData : any;
+  @Input() referreeData: any;
   @Input() periodCount: any;
   @Input() jerseyColor: any;
   @Output() updateStatsData = new EventEmitter<any>();
@@ -28,18 +28,17 @@ export class TeamOneComponent implements OnInit {
   modalContent: FormGroup;
   modalHeader: string;
   statsData: any;
-  
+
 
   get formData() { return <FormArray>this.cardForms.get('cards'); }
 
   get modalFormData() { return <FormArray>this.modalContent.get('questions'); }
 
-  constructor(private fb: FormBuilder, public dialog: MatDialog) { 
+  constructor(private fb: FormBuilder, public dialog: MatDialog) {
     this.cardForms = this.fb.group({
       team: ['1'],
       cards: new FormArray([])
     });
-    
   }
 
   ngOnInit() {}
@@ -56,7 +55,7 @@ export class TeamOneComponent implements OnInit {
         });
         questionFormArray.push(questionFormGroup);
       });
-      
+
       const newFormGroup = this.fb.group({
         clicked: false,
         title: card.title,
@@ -92,15 +91,15 @@ export class TeamOneComponent implements OnInit {
   createStatsData(statsData) {
     this.statsData = statsData;
     let time_stamp = {};
-    let player1 = this.statsData.player.player1;
-    let player2 = this.statsData.player.player2;
-    let oppositionPlayer = this.statsData.player.oppositionPlayer;
-    let assist = this.statsData.isAssist;
-    let rebound = this.statsData.selectedReboundValue;
-    let timeString = new Date().toLocaleTimeString('en-US', { hour12: false });
+    const player1 = this.statsData.player.player1;
+    const player2 = this.statsData.player.player2;
+    const oppositionPlayer = this.statsData.player.oppositionPlayer;
+    const assist = this.statsData.isAssist;
+    const rebound = this.statsData.selectedReboundValue;
+    const timeString = new Date().toLocaleTimeString('en-US', { hour12: false });
     time_stamp = {
-      'date_created': timeString, 'period': this.periodCount, 
-      'referee_id': this.referreeData.refereeId, 'referee_unique_id': this.referreeData.refereeKhelId, 
+      'date_created': timeString, 'period': this.periodCount,
+      'referee_id': this.referreeData.refereeId, 'referee_unique_id': this.referreeData.refereeKhelId,
       'referee_username': this.referreeData.refereeUserName, 'team_id': this.teamDetails.managers.team1[0].team_id
     };
     switch(this.statsData.modalTitle) {
@@ -117,72 +116,72 @@ export class TeamOneComponent implements OnInit {
       case 'Free Throw': {
         time_stamp = {
           ...time_stamp,
-          "type": "freethrow",
-          "score_by": player1.khelId,
-          "by": player1.khelId,
-        }
+          'type': 'freethrow',
+          'score_by': player1.khelId,
+          'by': player1.khelId,
+        };
         this.updateStatsData.emit(time_stamp);
         break;
       }
       case 'Block': {
         time_stamp = {
           ...time_stamp,
-          "type": "block",
-          "block_by": player1.khelId,
-          "by": player1.khelId,
-        }
+          'type': 'block',
+          'block_by': player1.khelId,
+          'by': player1.khelId,
+        };
         this.updateStatsData.emit(time_stamp);
         break;
       }
       case 'Steal': {
         time_stamp = {
           ...time_stamp,
-          "type": "steal",
-          "steal_by": player1.khelId,
-          "by": player1.khelId,
-        }
+          'type': 'steal',
+          'steal_by': player1.khelId,
+          'by': player1.khelId,
+        };
         this.updateStatsData.emit(time_stamp);
         break;
       }
       case 'TurnOver': {
         time_stamp = {
           ...time_stamp,
-          "type": "turnover",
-          "turnover_by": player1.khelId,
-          "by": player1.khelId,
-        }
+          'type': 'turnover',
+          'turnover_by': player1.khelId,
+          'by': player1.khelId,
+        };
         this.updateStatsData.emit(time_stamp);
         break;
       }
       case '2 Point': {
-        let asssit_khelid = 'none'; 
+        let asssit_khelid = 'none';
         if(assist) {
           asssit_khelid = player2.khelId;
         }
         time_stamp = {
           ...time_stamp,
-          "type": "two_points_made",
-          "score_by": player1.khelId,
-          "by": player1.khelId,
-          "assist_by": asssit_khelid,
-          "shot_chart": 'coords',
-        }
+          'type': 'two_points_made',
+          'score_by': player1.khelId,
+          'by': player1.khelId,
+          'assist_by': asssit_khelid,
+          'shot_chart': 'coords',
+        };
         this.updateStatsData.emit(time_stamp);
         this.createAssistRecord(asssit_khelid, assist, timeString);
         break;
       }
       case '3 Point': {
-        let asssit_khelid = 'none'; 
+        let asssit_khelid = 'none';
         if(assist) {
           asssit_khelid = player2.khelId;
         }
         time_stamp = {
           ...time_stamp,
-          "type": "three_points_made",
-          "score_by": player1.khelId,
-          "by": player1.khelId,
-          "assist_by": asssit_khelid,
-          "shot_chart": 'coords',
+          'type': 'three_points_made',
+          'score_by': player1.khelId,
+          'by': player1.khelId,
+          'assist_by': asssit_khelid,
+          'shot_chart': 'coords',
         };
         this.updateStatsData.emit(time_stamp);
         this.createAssistRecord(asssit_khelid, assist, timeString);
@@ -192,31 +191,31 @@ export class TeamOneComponent implements OnInit {
         if(rebound === 'none') {
           time_stamp = {
             ...time_stamp,
-            "type": "free_throw_miss",
-            "free_throw_miss_by": player1.khelId,
-            "by": player1.khelId,
+            'type': 'free_throw_miss',
+            'free_throw_miss_by': player1.khelId,
+            'by': player1.khelId,
           };
           this.updateStatsData.emit(time_stamp);
         } else {
           if(rebound === 'offensive') {
             time_stamp = {
               ...time_stamp,
-              "type": "free_throw_miss",
-              "free_throw_miss_by": player1.khelId,
-              "by": player1.khelId,
-              "rebound_by": player2.khelId,
-              "rebound_type": "offensive_rebound",
+              'type': 'free_throw_miss',
+              'free_throw_miss_by': player1.khelId,
+              'by': player1.khelId,
+              'rebound_by': player2.khelId,
+              'rebound_type': 'offensive_rebound',
             };
             this.updateStatsData.emit(time_stamp);
             this.createOffensiveReboundRecord(player2.khelId, timeString);
           } else {
             time_stamp = {
               ...time_stamp,
-              "type": "free_throw_miss",
-              "free_throw_miss_by": player1.khelId,
-              "by": player1.khelId,
-              "rebound_by": oppositionPlayer.khelId,
-              "rebound_type": "defensive_rebound",
+              'type': 'free_throw_miss',
+              'free_throw_miss_by': player1.khelId,
+              'by': player1.khelId,
+              'rebound_by': oppositionPlayer.khelId,
+              'rebound_type': 'defensive_rebound',
               'team_id': this.teamDetails.managers.team1[0].team_id
             };
             this.updateStatsData.emit(time_stamp);
@@ -229,31 +228,31 @@ export class TeamOneComponent implements OnInit {
         if(rebound === 'none') {
           time_stamp = {
             ...time_stamp,
-            "type": "two_points_miss",
-            "miss_by": player1.khelId,
-            "by": player1.khelId,
+            'type': 'two_points_miss',
+            'miss_by': player1.khelId,
+            'by': player1.khelId,
           };
           this.updateStatsData.emit(time_stamp);
         } else {
           if(rebound === 'offensive') {
             time_stamp = {
               ...time_stamp,
-              "type": "two_points_miss",
-              "miss_by": player1.khelId,
-              "by": player1.khelId,
-              "rebound_by": player2.khelId,
-              "rebound_type": "offensive_rebound",
+              'type': 'two_points_miss',
+              'miss_by': player1.khelId,
+              'by': player1.khelId,
+              'rebound_by': player2.khelId,
+              'rebound_type': 'offensive_rebound',
             };
             this.updateStatsData.emit(time_stamp);
             this.createOffensiveReboundRecord(player2.khelId, timeString);
           } else {
             time_stamp = {
               ...time_stamp,
-              "type": "two_points_miss",
-              "miss_by": player1.khelId,
-              "by": player1.khelId,
-              "rebound_by": oppositionPlayer.khelId,
-              "rebound_type": "defensive_rebound",
+              'type': 'two_points_miss',
+              'miss_by': player1.khelId,
+              'by': player1.khelId,
+              'rebound_by': oppositionPlayer.khelId,
+              'rebound_type': 'defensive_rebound',
               'team_id': this.teamDetails.managers.team1[0].team_id
             };
             this.updateStatsData.emit(time_stamp);
@@ -266,31 +265,31 @@ export class TeamOneComponent implements OnInit {
         if(rebound === 'none') {
           time_stamp = {
             ...time_stamp,
-            "type": "three_points_miss",
-            "miss_by": player1.khelId,
-            "by": player1.khelId,
+            'type': 'three_points_miss',
+            'miss_by': player1.khelId,
+            'by': player1.khelId,
           };
           this.updateStatsData.emit(time_stamp);
         } else {
           if(rebound === 'offensive') {
             time_stamp = {
               ...time_stamp,
-              "type": "three_points_miss",
-              "miss_by": player1.khelId,
-              "by": player1.khelId,
-              "rebound_by": player2.khelId,
-              "rebound_type": "offensive_rebound",
+              'type': 'three_points_miss',
+              'miss_by': player1.khelId,
+              'by': player1.khelId,
+              'rebound_by': player2.khelId,
+              'rebound_type': 'offensive_rebound',
             };
             this.updateStatsData.emit(time_stamp);
             this.createOffensiveReboundRecord(player2.khelId, timeString);
           } else {
             time_stamp = {
               ...time_stamp,
-              "type": "three_points_miss",
-              "miss_by": player1.khelId,
-              "by": player1.khelId,
-              "rebound_by": oppositionPlayer.khelId,
-              "rebound_type": "defensive_rebound",
+              'type': 'three_points_miss',
+              'miss_by': player1.khelId,
+              'by': player1.khelId,
+              'rebound_by': oppositionPlayer.khelId,
+              'rebound_type': 'defensive_rebound',
               'team_id': this.teamDetails.managers.team1[0].team_id
             };
             this.updateStatsData.emit(time_stamp);
@@ -307,16 +306,16 @@ export class TeamOneComponent implements OnInit {
   createAssistRecord(asssit_khelid, assist, timeString) {
     let time_stamp = {};
     time_stamp = {
-      'date_created': timeString, 'period': this.periodCount, 
-      'referee_id': this.referreeData.refereeId, 'referee_unique_id': this.referreeData.refereeKhelId, 
+      'date_created': timeString, 'period': this.periodCount,
+      'referee_id': this.referreeData.refereeId, 'referee_unique_id': this.referreeData.refereeKhelId,
       'referee_username': this.referreeData.refereeUserName, 'team_id': this.teamDetails.managers.team1[0].team_id
     };
     if(assist) {
       time_stamp = {
         ...time_stamp,
-        "type": "assist",
-        "assist_by": asssit_khelid,
-        "by": asssit_khelid,
+        'type': 'assist',
+        'assist_by': asssit_khelid,
+        'by': asssit_khelid,
       };
       setTimeout(() => {
         this.updateStatsData.emit(time_stamp);
@@ -324,30 +323,30 @@ export class TeamOneComponent implements OnInit {
     }
   }
 
-  createOffensiveReboundRecord(khelId,timeString) {
+  createOffensiveReboundRecord(khelId, timeString) {
     let time_stamp = {};
     time_stamp = {
-      'date_created': timeString, 'period': this.periodCount, 
-      'referee_id': this.referreeData.refereeId, 'referee_unique_id': this.referreeData.refereeKhelId, 
+      'date_created': timeString, 'period': this.periodCount,
+      'referee_id': this.referreeData.refereeId, 'referee_unique_id': this.referreeData.refereeKhelId,
       'referee_username': this.referreeData.refereeUserName, 'team_id': this.teamDetails.managers.team1[0].team_id,
-      "type": "offensive_rebound",
-      "offensive_rebound_by": khelId,
-      "by": khelId,
+      'type': 'offensive_rebound',
+      'offensive_rebound_by': khelId,
+      'by': khelId,
     };
     setTimeout(() => {
       this.updateStatsData.emit(time_stamp);
     }, 1000);
   }
 
-  createDefensiveReboundRecord(khelId,timeString, teamId) {
+  createDefensiveReboundRecord(khelId, timeString, teamId) {
     let time_stamp = {};
     time_stamp = {
-      'date_created': timeString, 'period': this.periodCount, 
-      'referee_id': this.referreeData.refereeId, 'referee_unique_id': this.referreeData.refereeKhelId, 
+      'date_created': timeString, 'period': this.periodCount,
+      'referee_id': this.referreeData.refereeId, 'referee_unique_id': this.referreeData.refereeKhelId,
       'referee_username': this.referreeData.refereeUserName, 'team_id': teamId,
-      "type": "defensive_rebound",
-      "defensive_rebound_by": khelId,
-      "by": khelId,
+      'type': 'defensive_rebound',
+      'defensive_rebound_by': khelId,
+      'by': khelId,
     };
     setTimeout(() => {
       this.updateStatsData.emit(time_stamp);

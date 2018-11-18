@@ -13,7 +13,7 @@ export interface DialogData {
 }
 
 @Component({
-    selector: 'dialog-component',
+    selector: 'app-dialog-component',
     templateUrl: './dialog.component.html',
     styleUrls: ['./dialog.component.scss']
   })
@@ -32,8 +32,8 @@ export class DialogComponent {
   player: any;
   modalTitleColor: any;
 
-  get modalFormData() { 
-    return <FormArray>this.modalContent.get('questions'); 
+  get modalFormData() {
+    return <FormArray>this.modalContent.get('questions');
   }
 
   constructor(public dialogRef: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) {
@@ -43,7 +43,7 @@ export class DialogComponent {
     this.selectedTeamPlayerInField = data.selectedTeamPlayers.filter(player => player.is_substitute === false);
     this.oppositionTeamPlayerInField = data.oppositionTeamPlayers.filter(player => player.is_substitute === false);
   }
-  
+
   onUpdateClick(): void {
     this.dialogRef.close(true);
   }
@@ -68,12 +68,11 @@ export class DialogComponent {
         this.player = {...this.player, player1: playerDet.selectedPlayer };
       }
     } else {
-      this.player = {...this.player, oppositionPlayer: playerDet.selectedPlayer}
+      this.player = {...this.player, oppositionPlayer: playerDet.selectedPlayer};
     }
   }
 
   getColor(modalTitleColor) {
-    return modalTitleColor ? '#fff': '#000';
+    return modalTitleColor ? '#fff' : '#000';
   }
 }
-  
