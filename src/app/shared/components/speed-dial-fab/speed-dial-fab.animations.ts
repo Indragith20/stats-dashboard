@@ -8,7 +8,7 @@ import {
     transition,
     trigger
   } from '@angular/animations';
-  
+
   export const speedDialFabAnimations = [
     trigger('fabToggler', [
       state('inactive', style({
@@ -21,9 +21,9 @@ import {
     ]),
     trigger('speedDialStagger', [
       transition('* => *', [
-  
+
         query(':enter', style({ opacity: 0 }), {optional: true}),
-  
+
         query(':enter', stagger('40ms',
           [
             animate('200ms cubic-bezier(0.4, 0.0, 0.2, 1)',
@@ -36,7 +36,7 @@ import {
             )
           ]
         ), {optional: true}),
-  
+
         query(':leave',
           animate('200ms cubic-bezier(0.4, 0.0, 0.2, 1)',
             keyframes([
@@ -45,7 +45,7 @@ import {
             ])
           ), {optional: true}
         )
-  
+
       ])
     ])
   ];

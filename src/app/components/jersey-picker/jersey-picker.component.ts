@@ -19,25 +19,25 @@ export class JerseyPickerComponent implements OnInit {
   colorList: any[] = [{
     color: 'Red',
     value: '#F44336'
-  },{
+  }, {
     color: 'Purple',
     value: '#9C27B0'
-  },{
+  }, {
     color: 'Indigo',
     value: '#3F51B5 '
-  },{
+  }, {
     color: 'Green',
     value: '#4CAF50'
-  },{
+  }, {
     color: 'Blue',
     value: '#2196F3'
-  },{
+  }, {
     color: 'Yellow',
     value: '#FFEB3B'
-  },{
+  }, {
     color: 'Black',
     value: '#000000'
-  },{
+  }, {
     color: 'Brown',
     value: '#795548'
   }];

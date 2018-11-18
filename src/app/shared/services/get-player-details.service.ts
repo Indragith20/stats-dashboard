@@ -6,13 +6,13 @@ export class PlayerService {
     teamOnePlayersList: IPlayerList[];
     teamTwoPlayersList: IPlayerList[];
 
-    setPlayersList(playerListOne:IPlayerList [], playerListTwo: IPlayerList[]): void {
+    setPlayersList(playerListOne: IPlayerList [], playerListTwo: IPlayerList[]): void {
         this.teamOnePlayersList = playerListOne;
         this.teamTwoPlayersList = playerListTwo;
     }
 
-    //Change the First Parameter If required
-    getPlayerName(teamID: string,playerId: string): string {
+    // Change the First Parameter If required
+    getPlayerName(teamID: string, playerId: string): string {
         let identifiedPlayer: IPlayerList;
         if(this.teamOnePlayersList[0].team_id === teamID) {
             identifiedPlayer = this.teamOnePlayersList.find(player => player.player_id === playerId);
@@ -30,27 +30,27 @@ export class PlayerService {
     getIcon(eventType) {
         switch(eventType) {
             case 'turnover':
-                return '../../../assets/icons/travelling.png'
+                return '../../../assets/icons/travelling.png';
             case 'freethrow':
-                return '../../../assets/icons/free throw.png'
+                return '../../../assets/icons/free throw.png';
             case 'two_points_made':
-                return '../../../assets/icons/2 pointer.png'
+                return '../../../assets/icons/2 pointer.png';
             case 'three_points_made':
-                return '../../../assets/icons/3 pointer.png'
+                return '../../../assets/icons/3 pointer.png';
             case 'foul':
-                return '../../../assets/icons/intentional foul.png'
+                return '../../../assets/icons/intentional foul.png';
             case 'block':
-                return '../../../assets/icons/blocking.png'
+                return '../../../assets/icons/blocking.png';
             case 'steal':
-                return '../../../assets/icons/Steal.png'
+                return '../../../assets/icons/Steal.png';
             case 'free_throw_miss':
-                return '../../../assets/icons/free throw miss.png'
+                return '../../../assets/icons/free throw miss.png';
             case 'two_points_miss':
-                return '../../../assets/icons/3 point attempt.png'
+                return '../../../assets/icons/3 point attempt.png';
             case 'three_points_made':
-                return '../../../assets/icons/3 point attempt.png'
+                return '../../../assets/icons/3 point attempt.png';
             default:
-                return '../../../assets/icons/travelling.png'
+                return '../../../assets/icons/travelling.png';
         }
     }
 

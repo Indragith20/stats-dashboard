@@ -6,7 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./player-number.component.scss']
 })
 export class PlayerNumberComponent implements OnInit {
-  @Input() 
+  @Input()
   set playerInField(playerList: any) {
     if(playerList) {
       this.playerList = [];
@@ -15,8 +15,8 @@ export class PlayerNumberComponent implements OnInit {
           jerseyNumber: player.jersey_number,
           playerName: player.name,
           khelId: player.player_id
-        })
-      })
+        });
+      });
     }
   }
   @Input() containerID: any;
