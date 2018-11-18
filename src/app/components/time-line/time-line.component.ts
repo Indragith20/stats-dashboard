@@ -9,6 +9,7 @@ import { PlayerService } from '../../shared/services/get-player-details.service'
 })
 export class TimeLineComponent implements OnInit {
   formattedTimeLineData: any;
+  showError: boolean = false;
   constructor(public dialogRef: MatDialogRef<TimeLineComponent>, @Inject(MAT_DIALOG_DATA) public data: any,
           private playerService: PlayerService) {
     this.formatTimeLine(data);
@@ -18,7 +19,8 @@ export class TimeLineComponent implements OnInit {
   }
 
   formatTimeLine(data) {
-    if (data) {
+    if (data && data.timeline && data.timeline.length > 0) {
+      this.showError = false;
       this.formattedTimeLineData = data.timeline.filter(timeline => timeline instanceof Object)
         .map(filteredTimeline => ({
           time: filteredTimeline.date_created,
@@ -27,6 +29,8 @@ export class TimeLineComponent implements OnInit {
           playerName: this.playerService.getPlayerName(filteredTimeline.team_id, filteredTimeline.by),
           eventIcon: this.playerService.getIcon(filteredTimeline.type)
         })).reverse();
+    } else {
+      this.showError = true;
     }
   }
 

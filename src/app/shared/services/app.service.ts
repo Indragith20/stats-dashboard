@@ -16,11 +16,25 @@ export class AppService {
     constructor(private http: HttpClient) {
         this.headers = new HttpHeaders();
         this.headers.set('Content-Type', 'application/x-www-form-urlencoded');
+        this.intializeValuesFromSession();
+    }
+
+    intializeValuesFromSession() {
+        this.matchDetailsRetrieved = Boolean(sessionStorage.getItem('matchDetailsRetrieved'));
+        if(this.matchDetailsRetrieved) {
+            this.teamOneJersey = sessionStorage.getItem('teamOneJersey') ? sessionStorage.getItem('teamOneJersey') : undefined;
+            this.teamTwoJersey = sessionStorage.getItem('teamTwoJersey') ? sessionStorage.getItem('teamTwoJersey') : undefined;
+            this.referreeDetails = sessionStorage.getItem('referreeDetails') ? JSON.parse(sessionStorage.getItem('referreeDetails')) : undefined;
+            this.matchDetails = sessionStorage.getItem('matchDetails') ? JSON.parse(sessionStorage.getItem('matchDetails')) : undefined;
+            this.matchIdentifier = sessionStorage.getItem('matchIdentifier') ? sessionStorage.getItem('matchIdentifier') : undefined;
+        }
     }
 
     setJerseyColors(color1, color2) {
         this.teamOneJersey = color1;
         this.teamTwoJersey = color2;
+        sessionStorage.setItem('teamOneJersey', this.teamOneJersey);
+        sessionStorage.setItem('teamTwoJersey', this.teamTwoJersey);
     }
 
     getMatchDetailsByID(matchId: any) {
@@ -35,6 +49,9 @@ export class AppService {
                     this.matchDetails = data.status !== 'error' ? data : '';
                     this.matchDetailsRetrieved = true;
                     this.matchIdentifier = data.message[0].match_id;
+                    sessionStorage.setItem('matchDetails', JSON.stringify(this.matchDetails));
+                    sessionStorage.setItem('matchIdentifier', this.matchIdentifier);
+                    sessionStorage.setItem('matchDetailsRetrieved', String(this.matchDetailsRetrieved));
                     resolve(data);
                 }
             }, (err) => {
@@ -91,6 +108,7 @@ export class AppService {
             this.sendRequest(url, body).subscribe((data: any) => {
                 if(data.status === 'success') {
                     this.referreeDetails = data.message.USER_PROFILE_DATA;
+                    sessionStorage.setItem('referreeDetails', JSON.stringify(this.referreeDetails));
                     resolve(data);
                 }
             }, (err) => {

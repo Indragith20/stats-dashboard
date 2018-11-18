@@ -7,6 +7,7 @@ import { TimeLineComponent } from '../time-line/time-line.component';
 import { DetailedStatsComponent } from '../detailed-stats/detailed-stats.component';
 import { Router } from '@angular/router';
 import { PlayerService } from '../../shared/services/get-player-details.service';
+import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-stats-screen',
@@ -96,11 +97,12 @@ export class StatsScreenComponent implements OnInit {
       });
     }).catch((err) => {
       this.snackBar.openFromComponent(SnackbarComponent, {
-        data: err,
+        data: 'Stats Not Updated..Check Your Internet Connection',
         duration: 5000,
         horizontalPosition: 'right',
         verticalPosition: 'top'
       });
+      this.dialog.open(ErrorDialogComponent);
     });
   }
 

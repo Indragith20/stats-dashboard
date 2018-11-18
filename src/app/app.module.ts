@@ -28,6 +28,7 @@ import { DetailedStatsComponent } from './components/detailed-stats/detailed-sta
 import { TeamStatsComponent } from './components/detailed-stats/components/team-stats/team-stats.component';
 import { JerseyPickerComponent } from './components/jersey-picker/jersey-picker.component';
 import { PlayerService } from './shared/services/get-player-details.service';
+import { ErrorDialogComponent } from './shared/components/error-dialog/error-dialog.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { PlayerService } from './shared/services/get-player-details.service';
     TimeLineComponent,
     DetailedStatsComponent,
     TeamStatsComponent,
-    JerseyPickerComponent
+    JerseyPickerComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +61,7 @@ import { PlayerService } from './shared/services/get-player-details.service';
     MyOwnCustomMaterialModule
   ],
   providers: [AppService, AuthGuardService, PlayerService, { provide: HTTP_INTERCEPTORS, useClass: CustomHttpinterceptor, multi: true }],
-  entryComponents: [DialogComponent, SnackbarComponent, LoaderComponent, TimeLineComponent, DetailedStatsComponent],
+  entryComponents: [DialogComponent, SnackbarComponent, LoaderComponent, TimeLineComponent, DetailedStatsComponent, ErrorDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

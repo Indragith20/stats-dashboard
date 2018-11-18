@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { LoaderComponent } from '../components/loader/loader.component';
+import { ErrorDialogComponent } from '../components/error-dialog/error-dialog.component';
 
 @Injectable()
 export class CustomHttpinterceptor implements HttpInterceptor {
