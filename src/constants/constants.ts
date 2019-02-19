@@ -161,7 +161,7 @@ export const cards = [{
         question: 'Enter Player Number',
         currentTeam: true,
         type: 'icon'
-    },{
+    }, {
         questionId: 2,
         question: 'To Opponent Number',
         currentTeam: false,
